@@ -6,6 +6,17 @@
 > **反模板化纪律**：禁止 AI 直接复制样例句式生成脚本；A4 遮名测试同时检测脚本与样例库文本相似度（§9.5）。
 > **演进**：每完成 5 条视频，回填 1—2 组新的正反样例。
 
+### 🔴 审计修复：叙事逻辑残留量化标准
+> 来源：`assets/narrative-residue-blacklist.json`
+> MODEL_B（审计角色）在 skill-2 中英对照 + skill-5 A21 自检时自动扫描。
+
+| 阈值 | 触发动作 |
+|---|---|
+| 每 1000 词出现黑名单词 ≥ 2 次 | **FAIL** → Gate 3 重审 |
+| 每 1000 词出现黑名单词 = 1 次 | **WARN** → 人类判断上下文是否安全（如 "labeled a tyrant by later historians" 是解构，不是残留） |
+
+完整黑名单 + 每个词的 safe/unsafe 上下文示例 → `assets/narrative-residue-blacklist.json`
+
 ---
 
 ## N1 道德史观

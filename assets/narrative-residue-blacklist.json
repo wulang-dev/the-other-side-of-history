@@ -1,0 +1,92 @@
+{
+  "_schema": "assets/narrative-residue-blacklist.json v1",
+  "_source": "审计修复：FAIL-4 叙事逻辑残留无量化黑名单",
+  "_usage": "MODEL_B（审计角色）在 skill-2 中英对照 + skill-5 A21 自检时，扫描英文脚本里的中国史观残留词",
+  "_threshold": {
+    "每1000词出现次数": {
+      "FAIL": 2,
+      "WARN": 1
+    },
+    "扫描范围": "所有英文正文（不含标题/简介）"
+  },
+  "_note": "以下是**英文翻译中可能不自觉带出中国史观的词汇/句型**。扫描时做大小写不敏感匹配 + 上下文判断（如果 context 是在解构/批判这个框架，不算残留）",
+  "entries": [
+    {
+      "id": "N1",
+      "framework": "道德史观（明君/昏君/暴君）",
+      "blacklist_en": ["wise ruler", "benevolent emperor", "great emperor", "tyrant", "cruel ruler", "despot", "evil emperor", "incompetent ruler"],
+      "blacklist_zh_source": ["明君", "昏君", "暴君", "仁政", "德治"],
+      "safe_context_example": "was labeled a tyrant by later historians, let's look at what documents actually say",
+      "unsafe_example": "he was a great emperor who brought prosperity to the land"
+    },
+    {
+      "id": "N2",
+      "framework": "成王败寇",
+      "blacklist_en": ["history remembers winners", "might makes right", "victory is justice", "losers are always wrong", "the winner writes history"],
+      "safe_context_example": "the fact that he won shaped how historians framed his actions",
+      "unsafe_example": "because he won, he was right"
+    },
+    {
+      "id": "N3",
+      "framework": "天命/气数",
+      "blacklist_en": ["mandate of heaven", "divine right", "heaven's will", "destiny", "fate", "prophecy", "the stars aligned"],
+      "blacklist_zh_source": ["天命", "气数", "天意", "上天"],
+      "safe_context_example": "contemporary propaganda framed his rise as a heavenly mandate",
+      "unsafe_example": "his victory was destined by heaven"
+    },
+    {
+      "id": "N4",
+      "framework": "忠奸对立",
+      "blacklist_en": ["loyal servant", "traitor", "treacherous official", "good minister vs bad minister", "faithful courtier"],
+      "blacklist_zh_source": ["忠良", "奸臣", "忠臣", "叛逆"],
+      "safe_context_example": "the system rewarded officials who demonstrated loyalty to the throne",
+      "unsafe_example": "he was a loyal servant while the other was a traitor"
+    },
+    {
+      "id": "N5",
+      "framework": "大一统叙事",
+      "blacklist_en": ["unification is progress", "one great nation", "unification is the natural order", "divided we fall"],
+      "safe_context_example": "unification simplified trade routes but also redistributed tax burdens onto local populations",
+      "unsafe_example": "unification was the right and inevitable outcome"
+    },
+    {
+      "id": "N6",
+      "framework": "华夷之辨",
+      "blacklist_en": ["barbarian", "savage", "civilized vs uncivilized", "foreign devils", "cultural superiority"],
+      "blacklist_zh_source": ["蛮夷", "夷狄", "野蛮"],
+      "safe_context_example": "contemporary texts referred to them as barbarians; let's look at what archaeological evidence shows about their society",
+      "unsafe_example": "they were uncivilized compared to the Chinese"
+    },
+    {
+      "id": "N7",
+      "framework": "兴亡周期",
+      "blacklist_en": ["dynastic cycle", "rise and fall is inevitable", "all dynasties end the same way", "historical pattern of rise and collapse"],
+      "safe_context_example": "multiple factors—fiscal collapse, military mutiny, and succession crisis—intersected at this point",
+      "unsafe_example": "this dynasty followed the inevitable pattern of rise and fall"
+    },
+    {
+      "id": "N8",
+      "framework": "英雄史观",
+      "blacklist_en": ["great man", "hero of history", "single-handedly changed", "was the sole reason", "the man who made it all happen"],
+      "safe_context_example": "his decisions interacted with a broader fiscal crisis and military vacuum",
+      "unsafe_example": "he single-handedly changed the course of Chinese history"
+    },
+    {
+      "id": "N9",
+      "framework": "为尊者讳/春秋笔法",
+      "blacklist_en": ["hidden truth", "secret history", "what they didn't tell you", "the real story they covered up"],
+      "blacklist_zh_source": ["被掩盖", "秘史", "不敢写"],
+      "safe_context_example": "the official annals only recorded his death, not what happened to his allies—this is a gap we need to acknowledge",
+      "unsafe_example": "history has been hiding the truth from you"
+    },
+    {
+      "id": "N10",
+      "framework": "因果报应/道德补偿",
+      "blacklist_en": ["he got what he deserved", "karma", "his past actions caught up with him", "justice was served"],
+      "blacklist_zh_source": ["报应", "活该", "因果"],
+      "safe_context_example": "after years of fiscal strain and military overextension, his regime collapsed",
+      "unsafe_example": "in the end, his past cruelty caught up with him"
+    }
+  ],
+  "scan_instructions": "1. MODEL_B 扫描英文脚本的 blacklist_en 词汇。2. 每个匹配检查上下文，如果 safe_context 句型出现则降级。3. 每 1000 词累计 ≥ 2 次 → FAIL；= 1 次 → WARN（人类判断）。4. Gate 3 报告里标注：哪个词、哪段、原文、为什么算残留、建议改法。"
+}

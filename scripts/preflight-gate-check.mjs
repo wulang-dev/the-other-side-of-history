@@ -53,10 +53,29 @@ if (titles.length === 0) {
 console.log(`\n🔍 Gate 1 自动预检 — episode: ${slug}`);
 console.log(`   标题候选数: ${titles.length}\n`);
 
+// === 🆕 RULES §12: [TBD] 占位符硬检查（WARN-10 修复项）===
+const preflightMdPath = path.join(ROOT, 'episodes', slug, 'preflight-research.md');
+let tbdBlocked = false;
+if (fs.existsSync(preflightMdPath)) {
+  const mdContent = fs.readFileSync(preflightMdPath, 'utf-8');
+  const tbdMatches = mdContent.match(/\[TBD[^\]]*\]|\[待填充[^\]]*\]|\[待补[^\]]*\]|\[TBD[^\]]*$/gi) || [];
+  if (tbdMatches.length > 0) {
+    tbdBlocked = true;
+    console.log(`\n❌ RULES §12 硬检查失败：preflight-research.md 里还有 ${tbdMatches.length} 个未替换占位符`);
+    console.log(`   前 5 个: ${tbdMatches.slice(0, 5).join(', ')}`);
+    console.log(`   🔒 Gate 1 暂停 — 请先把所有 [TBD] 替换为 MODEL_A 调研结果或人类手写内容`);
+  } else {
+    console.log(`✅ RULES §12: preflight-research.md 无未替换占位符`);
+  }
+} else {
+  console.log(`⚠️  preflight-research.md 不存在，跳过 [TBD] 检查`);
+}
+
 // === 自动化检测函数 ===
 const titleBlacklist = ['传奇', '一生', '风云', '秘史', '真相大白', '惊天秘密', '不敢相信', '震惊', '揭秘', '真相', '被掩盖'];
-const politicalKeywords = ['习近平', '习近平', '中国共产党', '共产党', '台湾', '香港', '西藏', '新疆', '天安门', '六四', '毛泽东', '毛泽东']; // §11.4 V7 当代政治
+const politicalKeywords = ['习近平', '中国共产党', '共产党', '台湾', '香港', '西藏', '新疆', '天安门', '六四', '毛泽东']; // §11.4 V7 当代政治
 const aiKeywords = ['AI', '人工智能', 'GPT', 'ChatGPT', '大模型', '算法']; // §12.4 禁止缩略图出现 AI 字样
+const violenceKeywords = ['massacre', 'torture', 'behead', 'beheaded', 'burned', 'burning', 'bloodbath', 'genocide', 'slaughter', '斩首', '屠杀', '酷刑', '焚城']; // RULES §9 V2 暴力呈现边界
 
 // §11.4 可自动化项：
 // ✅ 4. 没有抽象大词 → 黑名单扫描
@@ -116,6 +135,13 @@ function checkTitle(title) {
   results.n3_costOrTwist = {
     status: hasCost ? 'PASS' : 'WARN',
     reason: hasCost ? `有代价/反转关键词` : '没匹配到（需人工判断是否有）'
+  };
+
+  // 🆕 RULES §9 V2 暴力呈现边界（WARN-6 修复项）：标题禁止暴力词
+  const foundViolence = violenceKeywords.filter(k => lower.includes(k.toLowerCase()));
+  results.n_violenceTitle = {
+    status: foundViolence.length ? 'FAIL' : 'PASS',
+    reason: foundViolence.length ? `标题含暴力词: ${foundViolence.join(', ')}` : '无'
   };
 
   return results;
@@ -178,4 +204,11 @@ console.log(`   T4 遮住文字能说出情绪词`);
 console.log(`   T5 标题+缩略图合起来构成完整缺口`);
 console.log(`\n✅ 自动预检完成。现在可以进入 Gate 1 签字阶段。`);
 
-process.exit(totalFail > 0 ? 1 : 0);
+// exit code: FAIL > 0 或 TBD 未替换 → 阻断 Gate 1
+if (totalFail > 0 || tbdBlocked) {
+  console.log(`\n🔒 Gate 1 暂停原因：`);
+  if (totalFail > 0) console.log(`   - 标题/缩略图自动检测有 ${totalFail} 个 FAIL`);
+  if (tbdBlocked) console.log(`   - preflight-research.md 还有未替换的 [TBD] 占位符`);
+  process.exit(1);
+}
+process.exit(0);

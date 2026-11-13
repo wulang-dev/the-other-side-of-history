@@ -1,0 +1,128 @@
+{
+  "_schema": "assets/chinese-english-interference-dictionary.json v1",
+  "_source": "二次审计 FAIL-5：C1-C10 中式英语陷阱缺英文黑名单词库",
+  "_usage": "MODEL_B（审计角色）在 skill-2 中英对照自检 + skill-5 A26 中式英语扫描时，逐词匹配错误表达",
+  "_note": "每个 C 陷阱至少 5 组 错→对 的英文例句。模型 B 扫描时：匹配错例 → 查上下文 → 输出建议替换为对例。Gate 3 英文质量审查（E1-E5 + C1-C10）必须至少记录 3 处修改前后对照。",
+  "traps": [
+    {
+      "id": "C1",
+      "name": "冗余范畴词（Redundant Category Nouns）",
+      "zh_source": "中文习惯在动词/形容词后加范畴词（做XX的工作、进行XX的行动），英文不需要",
+      "wrong_patterns": [
+        {"wrong": "make a decision to", "right": "decide to", "note": "decision 是范畴词，decide 本身就是动作"},
+        {"wrong": "make an attempt to", "right": "try to", "note": "attempt 范畴词，try 更地道"},
+        {"wrong": "carry out an investigation of", "right": "investigate", "note": "investigation 范畴词，investigate 是动词"},
+        {"wrong": "conduct a search for", "right": "search for", "note": "同上"},
+        {"wrong": "undertake the task of", "right": "work on", "note": "task 范畴词，work on 更自然"},
+        {"wrong": "give consideration to", "right": "consider", "note": "consideration 范畴词"},
+        {"wrong": "make adjustments to", "right": "adjust", "note": "adjustments 范畴词"}
+      ]
+    },
+    {
+      "id": "C2",
+      "name": "中文套话直译（Literal Translation of Chinese Clichés）",
+      "zh_source": "中文有大量四字成语/套话，直译英文不知所云",
+      "wrong_patterns": [
+        {"wrong": "as everyone knows", "right": "at the time", "note": "'众所周知'直译，历史视频应该直接说时间地点"},
+        {"wrong": "it is well known that", "right": "contemporary records show", "note": "同上，用具体来源替代套话"},
+        {"wrong": "history has proven that", "right": "let's look at what actually happened", "note": "'历史证明'直译，YouTube 观众更想看故事"},
+        {"wrong": "we all know that", "right": "the annals record", "note": "同上"},
+        {"wrong": "in the final analysis", "right": "looking at the surviving documents", "note": "'归根结底'直译，历史视频用史料说话"},
+        {"wrong": "it is universally acknowledged", "right": "scholars have debated", "note": "'公认'直译，暗示没有争议，但历史恰恰有争议"}
+      ]
+    },
+    {
+      "id": "C3",
+      "name": "主动语态缺失（Missing Active Voice）",
+      "zh_source": "中文被动少、英文被动多但历史叙事需要主动，否则失去力量",
+      "wrong_patterns": [
+        {"wrong": "It was decided by him that the capital should be moved.", "right": "He moved the capital.", "note": "历史叙事要聚焦'谁做了什么'，不是'什么被做了'"},
+        {"wrong": "The order was given by the emperor to execute the general.", "right": "The emperor ordered the general's execution.", "note": "主动语态更有冲击力"},
+        {"wrong": "Many policies were implemented by the government.", "right": "The court rolled out a series of new laws.", "note": "implemented 被动 + 抽象主语，换成主动 + 具体动词"},
+        {"wrong": "It was believed by people that he had supernatural powers.", "right": "Contemporary accounts claimed he could communicate with spirits.", "note": "把被动的 '被相信' 换成主动的 '当时的记载声称'"},
+        {"wrong": "The rebellion was crushed by the army.", "right": "The imperial army put down the rebellion.", "note": "被动语态让动作失去执行者，观众不知道是谁做的"}
+      ]
+    },
+    {
+      "id": "C4",
+      "name": "模糊动词（Vague Verbs）",
+      "zh_source": "中文有大量'做/搞/弄/处理'，英文对应的 do/make 太模糊",
+      "wrong_patterns": [
+        {"wrong": "do things", "right": "negotiate treaties / raise taxes / execute rivals", "note": "历史叙事里 'do things' 等于没说"},
+        {"wrong": "made changes", "right": "abolished the old exam system / created new military posts", "note": "具体说改了什么"},
+        {"wrong": "deal with problems", "right": "faced a grain shortage / suppressed a border uprising", "note": "deal with 是万能动词，历史里没有'处理问题'这种事"},
+        {"wrong": "take measures", "right": "sent 50,000 troops / imposed a grain embargo", "note": "take measures 套话，具体说措施是什么"},
+        {"wrong": "put forward ideas", "right": "proposed moving the capital to a more defensible location", "note": "put forward ideas 太模糊"}
+      ]
+    },
+    {
+      "id": "C5",
+      "name": "句子过长（Run-on Sentences）",
+      "zh_source": "中文流水句习惯，英文历史视频每句 ≤ 25 词",
+      "rule": "单句超过 25 词 → WARN；超过 35 词 → FAIL",
+      "example_fix": {
+        "wrong": "Wu Zetian who was originally a concubine of Emperor Taizong and then married his son Emperor Gaozong eventually became the only female emperor in Chinese history ruling from 690 to 705.",
+        "right": "Wu Zetian was originally a concubine of Emperor Taizong. She then married his son, Emperor Gaozong. In 690, she became the only woman to ever rule China as emperor."
+      }
+    },
+    {
+      "id": "C6",
+      "name": "抽象名词堆砌（Abstract Noun Stacking）",
+      "zh_source": "中文习惯用抽象名词结尾（XX的重要性、XX的必要性），英文历史叙事需要具体",
+      "wrong_patterns": [
+        {"wrong": "the importance of military strategy", "right": "how troop movements decided the outcome", "note": "importance 是抽象名词，换成具体的'军队调动如何决定胜负'"},
+        {"wrong": "the complexity of the political situation", "right": "the court was split into three competing factions", "note": "complexity 抽象，具体说'朝廷分成三派'"},
+        {"wrong": "the inevitability of the dynasty's collapse", "right": "fiscal bankruptcy and military mutiny left the emperor with no options", "note": "inevitability 暗示天命，换成具体原因"},
+        {"wrong": "the development of trade", "right": "merchants from Persia and India began arriving at Chang'an's western markets", "note": "development 抽象，具体说'波斯和印度商人来到长安西市'"},
+        {"wrong": "the influence of Buddhism", "right": "Buddhist monks founded temples that became major landowners", "note": "influence 抽象，具体说'僧侣建庙成为大地主'"}
+      ]
+    },
+    {
+      "id": "C7",
+      "name": "过度解释（Over-explanation）",
+      "zh_source": "中文读者习惯背景铺垫，欧美观众喜欢直接切入",
+      "rule": "前 15 秒不要出现 'In the history of China...'、'China is a country with...' 这类开场",
+      "wrong_patterns": [
+        {"wrong": "In the long history of China, there have been many emperors...", "right": "In 690 CE, a woman named Wu Zetian declared herself emperor.", "note": "直接切入时间+人物+事件"},
+        {"wrong": "China is one of the oldest civilizations in the world, and its history spans thousands of years...", "right": "Let's go to Chang'an, 649 CE.", "note": "用场景代替背景介绍"},
+        {"wrong": "Before we talk about Wu Zetian, let's first understand the Tang dynasty...", "right": "To understand her rise, we need to go back twenty years.", "note": "承上启下不要太生硬"}
+      ]
+    },
+    {
+      "id": "C8",
+      "name": "文化负载词未解释（Unexplained Culture-specific Terms）",
+      "zh_source": "中文词汇自带文化背景，欧美观众没有，需要解释（见专有名词模板）",
+      "rule": "首次出现时用括号解释，见 assets/pronunciation-dict.json",
+      "example": [
+        "Tang Dynasty (a golden-age Chinese ruling house, 618–907 CE)",
+        "Chang'an (modern Xi'an, the Tang capital)",
+        "chancellor (top civil official, equivalent to a prime minister)"
+      ]
+    },
+    {
+      "id": "C9",
+      "name": "语域错误（Wrong Register）",
+      "zh_source": "中文书面语/口语分界不如英文严格，YouTube 旁白需要口语化但专业",
+      "wrong_patterns": [
+        {"wrong": "It is imperative that we examine this matter carefully.", "right": "Let's look at what actually happened here.", "note": "imperative 书面语，YouTube 旁白用 let's"},
+        {"wrong": "This phenomenon can be attributed to multiple factors.", "right": "A few things came together to make this happen.", "note": "phenomenon / attributed to 学术腔，换成口语"},
+        {"wrong": "Subsequent developments corroborate this hypothesis.", "right": "What happened next confirms this.", "note": "subsequent / corroborate / hypothesis 都是学术腔"},
+        {"wrong": "We shall now proceed to the next topic.", "right": "Now, here's where it gets interesting.", "note": "shall 正式，换成口语过渡"}
+      ]
+    },
+    {
+      "id": "C10",
+      "name": "中式衔接词（Chinese-style Transitions）",
+      "zh_source": "中文衔接词（首先/其次/最后/一方面/另一方面）直译英文很生硬",
+      "wrong_patterns": [
+        {"wrong": "On the one hand... on the other hand...", "right": "Here's the thing... / But there's a catch...", "note": "历史叙事不用'一方面另一方面'，用故事性衔接"},
+        {"wrong": "First... Second... Finally...", "right": "For starters... / And then... / The kicker is...", "note": "数字序号衔接太机械，YouTube 用口语化过渡"},
+        {"wrong": "In addition...", "right": "And that's not all...", "note": "In addition 书面，换成口语"},
+        {"wrong": "As a result...", "right": "So what happened next was...", "note": "As a result 太干，用故事性衔接"},
+        {"wrong": "Consequently...", "right": "Which meant...", "note": "Consequently 学术腔"}
+      ]
+    }
+  ],
+  "scan_priority": ["C2", "C3", "C4", "C9", "C10"],
+  "scan_method": "1. 正则匹配 wrong_patterns[].wrong 短语。2. 句长检测（>25 词 WARN，>35 词 FAIL）。3. 被动语态占比（>15% WARN）。4. 每个匹配输出 wrong → right 替换建议。"
+}

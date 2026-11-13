@@ -163,3 +163,69 @@ A33-A37（前 3 秒钩子兑现 / 30 秒开环 / 60-90 秒 re-hook / 代价碎�
 2. **严禁任何当代类比句型**（"similar to today's...", "parallels modern..."）
 3. **地图只画历史边界**，不叠当代国家轮廓
 4. 评论区出现当代政治关联 → 用固定英文回复模板，不辩论不延伸
+
+---
+
+## 9. V2 暴力呈现边界（审计 WARN-6 修复项）
+
+详见 `assets/v2-violence-boundary.md`。核心规则：
+1. **脚本里暴力词黑名单**（屠杀/massacre、酷刑/torture、斩首/beheaded 等）→ 必须替换为中性描述
+2. **标题/缩略图绝对禁止任何暴力词**作为卖点
+3. **画面禁止清单**：不拍斩首/尸体/酷刑器具特写，用地标空镜+史料文字+数据图表替代
+4. 目标：**所有视频保持全年龄可看（13+）**，不触发 YouTube 年龄限制
+
+---
+
+## 10. AI 披露 + 标题缩略图 A/B（审计 WARN-7 + WARN-9 修复项）
+
+### 10.1 AI 披露固定模板（A17 机械检查依据）
+
+YouTube Studio 视频简介**开头必须**包含以下声明（精确文本，不增不减）：
+
+```
+🎓 History videos made by a human creator with AI assistance for research, visuals, and voiceover. All historical judgments and narrative structure are decided by the human creator before publication.
+```
+
+**纪律**：
+- 放在简介**第一行**，不是中间或末尾
+- 标题/缩略图**严禁**出现 "AI" / "GPT" / "ChatGPT" 作为卖点（与 §11.4 一致）
+- skill-5 A17 自动检查简介开头是否有这段文本 → 没有则 FAIL
+
+### 10.2 标题 + 缩略图同时 A/B 测试
+
+前 20 条视频**每条做 2 标题 × 2 缩略图 = 4 组 A/B 测试**：
+
+| 视频序号 | A/B 组 | 说明 |
+|---|---|---|
+| 1-20 | 2 标题 × 2 缩略图 = 4 组 | YouTube Studio 原生支持，成本为零 |
+| 21+ | 优胜组合直接上 | 用前 20 条跑出的最优标题结构 + 缩略图版式 |
+
+**为什么加标题 A/B**：标题和缩略图对 CTR 的影响是 50/50。只测缩略图等于浪费了一半的数据量。
+
+---
+
+## 11. 专有名词首次出现模板（审计 WARN-8 修复项）
+
+详见 `assets/proper-noun-intro-templates.md`。四类模板（朝代/人物/地名/官职）首次出现必须用括号解释：
+
+| 类型 | 格式 | 示例 |
+|---|---|---|
+| 朝代 | `Name (ruling house, YYYY–ZZZZ CE)` | "Tang Dynasty (618–907 CE)" |
+| 人物 | `Name (role, YYYY–ZZZZ CE)` | "Wu Zetian (empress regnant, 624–705 CE)" |
+| 地名 | `Name (modern equivalent, 方位)` | "Chang'an (modern Xi'an)" |
+| 官职 | 意译 + 简短解释 | "chancellor (top civil official)" |
+
+**skill-2 prompt 强制纪律**：MODEL_A 生成英文旁白时自动应用，Gate 3 覆盖率 < 70% → FAIL。
+
+---
+
+## 12. Gate 1 前预检（审计 WARN-10 修复项）
+
+skill-0 `preflight-research.md` 里**所有 [TBD] 占位符必须在 Gate 1 前替换完成**。
+
+**preflight-gate-check.mjs 新增检查**：
+- 扫描 `preflight-research.md` 是否仍有 `[TBD` 或 `[待填充]` 标记
+- 发现任何未替换占位符 → **硬拒绝进入 Gate 1**，脚本 exit code = 1
+- 输出："preflight-research.md 里还有 N 个 [TBD] 未替换，Gate 1 暂停"
+
+**为什么重要**：如果人类 Gate 1 签字前忘了替换占位符就签字，整条预调研报告是假的，后续所有决策基于空信息。

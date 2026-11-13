@@ -92,9 +92,10 @@
 自检报告 + H1—H10 签字，是"人类创作投入"证据链最后一环。如果平台质疑模板化生产，A4/A21/A25/H2/H7/H8/H9 可作为人类判断参与的直接证据。
 
 ## 模型配置
-- **语义扫描类**（A21 叙事逻辑、A22 价值观、A24 当代政治、A26 中式英语、A35 re-hook）：MODEL_B（`HISTORY_MODEL_B_*`）
+- **语义扫描类**（A21 叙事逻辑、A22 价值观、A24 当代政治、A26 中式英语、A35 re-hook）：MODEL_B 审计（Trae 内置 GLM-5.3 或 Kimi-K3）
 - **可读性计算**（A25 Flesch-Kincaid + 句长 + 被动）：本地脚本 `scripts/readability.mjs`，不需要模型
-- **地图预筛**（A9）：MODEL_VQA（`HISTORY_VQA_*`）
-- **降级**：MODEL_B 不可用时切 DeepSeek-V3
-- **成本估算**：A21—A37 文本模型调用 → 约 0.5—2 元
-- **模型隔离硬约束**：自检用 MODEL_B（审计角色），与 skill-2 的 MODEL_A（生成角色）**禁止同一个模型既生成又自检**。详见 `.trae/rules/ao-workflow-runner.md` §4。
+- **地图预筛**（A8/A9）：已跳过，降级为 H3 人类自检签字（同 skill-3）
+- **成本**：Trae 积分，零外部成本
+- **切换纪律**：skill-5 执行前，在 Trae 右下角切到 MODEL_B（GLM-5.3）。
+- **模型隔离硬约束**：自检用 MODEL_B（审计角色），skill-2 生成用 MODEL_A（生成角色），必须不同 Provider。**禁止同一个模型既生成又自检**。详见 `.trae/rules/ao-workflow-runner.md` §4。
+- **违规后果**：如果 skill-2 生成和 skill-5 自检在同一次 Trae 会话、同一个模型下完成 → 自检报告作废，Gate 3 重审。

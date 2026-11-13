@@ -59,7 +59,9 @@ Gate 2 必须逐条裁决 known/unknown/inference。**无法确认权利状态�
 - AI 初始分类是建议，不是决定
 
 ## 模型配置
-- **角色**：MODEL_RESEARCH（`HISTORY_MODEL_RESEARCH_*`）
-- **为什么**：考据需要 1M 上下文处理长正史片段、对比多来源。MiMo V2.5 Pro 成本最低。
-- **降级**：MODEL_RESEARCH 不可用时切 MODEL_A
-- **成本估算**：长上下文调用 → 约 0.5—2 元
+- **角色**：MODEL_RESEARCH 考据（`.env` → `HISTORY_MODEL_RESEARCH`）
+- **Trae 内置模型名**：Kimi-K3 或 MiMo-V2.6-Pro
+- **为什么**：考据需要长上下文处理整段正史、对比多来源。Kimi-K3 长上下文是 Trae 内置里成本最低的考据选择。
+- **成本**：Trae 积分
+- **切换纪律**：skill-1 执行前，在 Trae 右下角切到 Kimi-K3 或 MiMo。
+- **隔离纪律**：与 MODEL_A（生成）不同 Provider（Moonshot/小米 vs 字节/DeepSeek），隔离自动满足。

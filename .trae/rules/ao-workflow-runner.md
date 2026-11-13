@@ -62,31 +62,42 @@ englishQualityCheck: "passed"
 
 ## 4. Skill 间模型隔离 + 模型角色硬编码（§21.2 硬约束）
 
-### 4.1 四个角色（写在 `.env`，每个 Skill 必须显式声明自己用哪个）
+### 4.1 角色绑定表（路径 A：Trae 内置文本 + 火山引擎 TTS）
 
-| 角色 | `.env` 变量 | 用在 | 为什么这个 Provider | 成本估算 | 降级 |
+| 角色 | `.env` 变量 | 用在 | 模型名 | Provider | 成本 |
 |---|---|---|---|---|---|
-| **MODEL_A 生成** | `HISTORY_MODEL_A_*` | skill-0 预调研、skill-2 英文生成 | 成本低、指令遵循好、中文理解强（DeepSeek V4-Pro） | 0.5-2 元/条 | Kimi K3 |
-| **MODEL_B 审计** | `HISTORY_MODEL_B_*` | skill-2 中英对照、skill-5 A21-A37、skill-4 QA | 视觉模型可同时读中文稿+英文脚本；独立 Provider 保证隔离（GLM-4.1V-Thinking-Flash） | < 1 元/条 | Kimi K3 B 或 DeepSeek-V3 |
-| **MODEL_RESEARCH 考据** | `HISTORY_MODEL_RESEARCH_*` | skill-1 考据爬取+三栏初始分类 | 1M 上下文适合长史料（小米 MiMo V2.5 Pro） | 0.5-2 元/条 | MODEL_A |
-| **MODEL_TTS 配音** | `HISTORY_TTS_*` | skill-2.5 配音 | SSML 停顿/中英混读能力强 | 6-10 元/条 | Qwen3-TTS-Instruct-Flash |
-| **MODEL_VQA 视觉 QA** | `HISTORY_VQA_*` | skill-3 地图预筛、skill-5 A8/A9 | 帧级视频理解 | < 1 元/条 | MODEL_B |
+| **MODEL_A 生成** | `HISTORY_MODEL_A` | skill-0 预调研、skill-2 英文生成 | Seed-2.1-Pro-0915 或 DeepSeek-V4-Pro | **Trae 内置**（字节/DeepSeek） | Trae 积分（免费版每月 500） |
+| **MODEL_B 审计** | `HISTORY_MODEL_B` | skill-2 中英对照、skill-5 A21-A37、skill-4 QA | GLM-5.3 或 Kimi-K3 | **Trae 内置**（智谱/Moonshot） | Trae 积分 |
+| **MODEL_RESEARCH 考据** | `HISTORY_MODEL_RESEARCH` | skill-1 考据爬取+三栏初始分类 | Kimi-K3 或 MiMo-V2.6-Pro | **Trae 内置**（Moonshot/小米） | Trae 积分 |
+| **MODEL_TTS 配音** | `VOLC_TTS_*` | skill-2.5 配音 | 火山引擎 OpenSpeech | **外部（付费）** | ~10 元/条 |
+| ~~MODEL_VQA 视觉 QA~~ | 跳过 | skill-3 地图预筛、skill-5 A8/A9 | 已取消，降级为 H3 人类自检签字 | — | — |
 
-### 4.2 硬约束
+**MODEL_A ↔ MODEL_B 隔离硬约束**：Trae 内置模型全部是不同 Provider，隔离自动满足（字节豆包 / DeepSeek → 智谱 GLM / Kimi Moonshot，完全独立）。
 
-1. **MODEL_A 和 MODEL_B 必须是不同实例**（不同 Provider 或同一 Provider 不同端点）。禁止同一个模型既生成又自检。
-2. **所有 Skill 脚本里禁止写死 Provider 名称**。必须用 `process.env.HISTORY_MODEL_X_*` 引用。
-3. **每个 SKILL.md 末尾必须有 `## 模型配置` 章节**，写明：用哪个角色、为什么、降级角色、成本估算。
-4. **`.env` 里的 Provider/Endpoint 可以改**，但改的时候必须同步更新 SKILL.md 的模型配置章节（改角色不改理由，或角色和理由都改）。
+### 4.2 Trae 内置模型切换纪律
+
+Trae 内置模型在 IDE 右下角点模型名切换，**不是脚本调用 API**。纪律：
+1. **skill-0 预调研 / skill-2 英文生成前**：切换到 MODEL_A（Seed-2.1-Pro 或 DeepSeek-V4-Pro）
+2. **skill-2 中英对照 / skill-5 自检 / skill-4 QA 前**：切换到 MODEL_B（GLM-5.3 或 Kimi-K3）
+3. **skill-1 考据爬取前**：切换到 MODEL_RESEARCH（Kimi-K3 或 MiMo）
+4. 违反自动隔离：如果 skill-2 生成和 skill-5 自检在**同一次 Trae 会话**、**同一个模型**下完成，等于自审自判 → **该条视频自检报告作废，Gate 3 重审**
+
+### 4.3 硬约束
+
+1. **MODEL_A 和 MODEL_B 必须是不同 Provider 的不同实例**（Trae 内置选不同厂商即满足：字节 vs 智谱 / DeepSeek vs Kimi 等）。禁止同一个模型既生成又自检。
+2. **TTS 是唯一外部付费项**。`.env` 里只有 `VOLC_TTS_*` 是外部 Key。禁止偷偷加新的外部 API Key。
+3. **每个 SKILL.md 末尾必须有 `## 模型配置` 章节**，写明：用哪个角色、模型名（Trae 内置名称）、为什么。
+4. **禁止在 Skill 脚本里写死外部 Provider 名称**。TTS 是例外（火山引擎），其他文本模型全部走 Trae 内置。
 5. **禁止 Skill 脚本里写 `process.env.DEFAULT_MODEL`** 这类模糊引用。
 
-### 4.3 典型违规示例
+### 4.4 典型违规示例
 
 | 违规 | 正确 |
 |---|---|
-| skill-2 和 skill-5 都用 `deepseek-v4-pro` | skill-2 用 MODEL_A (deepseek-v4-pro)，skill-5 用 MODEL_B (glm-4.1v-thinking-flash) |
-| 脚本里写 `api_key = "sk-deepseek-xxx"` | 脚本里写 `api_key = process.env.HISTORY_MODEL_A_API_KEY` |
-| 所有 Skill 都写"主选 DeepSeek V4-Pro" | 每个 Skill 显式声明自己的角色，只有生成类 Skill 用 MODEL_A |
+| skill-2 和 skill-5 都用 Seed-2.1-Pro（同一个模型） | skill-2 用 Seed-2.1-Pro（MODEL_A），skill-5 用 GLM-5.3（MODEL_B） |
+| 在 `.env` 里给所有 Provider 都配 Key，脚本里随意切 | TTS 只保留 VOLC_TTS_*；其他模型用 Trae 内置 |
+| skill-1 考据用 MODEL_A（和 skill-2 生成同一个模型） | skill-1 用 MODEL_RESEARCH（Kimi-K3，长上下文） |
+| 一次 Trae 会话跑完 skill-2 生成 + skill-5 自检 | 会话 1：skill-2 生成（MODEL_A）→ 保存脚本；会话 2：skill-5 自检（MODEL_B）→ 读脚本审计 |
 
 ---
 

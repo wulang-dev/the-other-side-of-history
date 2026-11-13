@@ -102,9 +102,12 @@
 skill-2 生成英文用**模型 A**（如 DeepSeek V4-Pro），skill-5 自检 A21/A25/A26 用**模型 B**（GLM-4.1V-Thinking-Flash 或不同 Provider）。**禁止同一个模型既生成又自检**。
 
 ## 模型配置
-- **生成旁白**：MODEL_A（`HISTORY_MODEL_A_*`）— 强制口语/短句/主动语态
-- **中英对照自检**：MODEL_B（`HISTORY_MODEL_B_*`）— 独立实例，与 MODEL_A 隔离，禁止自审自判
-- **为什么**：英文生成是"产出高质量口语旁白"，需要指令遵循好的模型。中英对照是"审计"，需要视觉模型可同时读中文稿+英文脚本，且独立 Provider 保证隔离。
-- **降级**：MODEL_A 不可用时切 Kimi K3；MODEL_B 不可用时切 Kimi K3 B 或 DeepSeek-V3
-- **成本估算**：生成约 1—3 元；对照自检约 0.5—1 元
+- **生成旁白**：MODEL_A 生成（Trae 内置 Seed-2.1-Pro-0915 或 DeepSeek-V4-Pro）
+- **中英对照自检**：MODEL_B 审计（Trae 内置 GLM-5.3 或 Kimi-K3）
+- **为什么**：英文生成是"产出高质量口语旁白"，指令遵循好。中英对照是"审计"，必须独立 Provider 保证隔离。
+- **成本**：全部 Trae 积分，零外部成本
+- **切换纪律**：
+  - 生成旁白前，切到 MODEL_A（Seed-2.1-Pro）
+  - 中英对照自检前，切到 MODEL_B（GLM-5.3）
+  - **禁止在同一次 Trae 会话、同一个模型下完成生成和自检** → 自检作废，Gate 3 重审
 - **四层防护纪律**（§10.9）：Gate 3 中文逻辑稿定稿 → MODEL_A 生成英文 → MODEL_B 中英对照 → H9 签字。禁止跳过任何一层。

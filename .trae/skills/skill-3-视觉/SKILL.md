@@ -71,3 +71,10 @@
 ## 注意
 - 本条 Skill 的脚本化（Remotion 参数化组件、QGIS 图层筛选、ffmpeg 对齐）**延后到 M2**。M0 只写 Skill 规范。
 - 实际视觉生成由 Trae + ffmpeg + Remotion 完成，不是由 Skill 自动执行。
+
+## 模型配置
+- **地图预筛**：MODEL_VQA（`HISTORY_VQA_*`）— 帧级视频理解，标记可疑帧（年份遗漏、边界错误、标注指错）
+- **降级**：MODEL_VQA 不可用时切 MODEL_B（`HISTORY_MODEL_B_*`）
+- **成本估算**：按关键帧抽样调用 → < 1 元
+- **纪律**：AI 只标记可疑帧，不直接修正。修正回到 QGIS/CHGIS 图层和人工核对。
+- **非 AI 部分**（Remotion 组装、ffmpeg 对齐）是纯计算，不需要模型。

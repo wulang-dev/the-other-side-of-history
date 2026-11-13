@@ -57,3 +57,9 @@ Gate 2 必须逐条裁决 known/unknown/inference。**无法确认权利状态�
 - 来源台账即考据表（PRD §8.3）
 - 无法确认权利状态的来源默认排除
 - AI 初始分类是建议，不是决定
+
+## 模型配置
+- **角色**：MODEL_RESEARCH（`HISTORY_MODEL_RESEARCH_*`）
+- **为什么**：考据需要 1M 上下文处理长正史片段、对比多来源。MiMo V2.5 Pro 成本最低。
+- **降级**：MODEL_RESEARCH 不可用时切 MODEL_A
+- **成本估算**：长上下文调用 → 约 0.5—2 元

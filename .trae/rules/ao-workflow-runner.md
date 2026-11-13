@@ -60,14 +60,33 @@ englishQualityCheck: "passed"
 
 ---
 
-## 4. Skill 间模型隔离（§21.2 硬约束）
+## 4. Skill 间模型隔离 + 模型角色硬编码（§21.2 硬约束）
 
-**生成英文脚本的 Skill 与自检 Skill 必须使用不同模型实例，禁止自审自判。**
-- skill-2 生成英文脚本 → 模型 A（DeepSeek V4-Pro）
-- skill-5 自检 A21（叙事语义扫描）+ A25—A28（英文质量）→ 模型 B（GLM-4.1V-Thinking-Flash 或同一 Provider 的不同端点）
-- skill-2 英文脚本 AI 优先生成（§10.9 四层防护）的双模型隔离同样适用：模型 A 生成、模型 B 中英对照自检
+### 4.1 四个角色（写在 `.env`，每个 Skill 必须显式声明自己用哪个）
 
-**例外**：当预算紧张时，同一 Provider 的不同模型端点（如 DeepSeek-V3 vs DeepSeek-V4-Pro）也算不同实例；但**不能同一个模型既生成又自检**。
+| 角色 | `.env` 变量 | 用在 | 为什么这个 Provider | 成本估算 | 降级 |
+|---|---|---|---|---|---|
+| **MODEL_A 生成** | `HISTORY_MODEL_A_*` | skill-0 预调研、skill-2 英文生成 | 成本低、指令遵循好、中文理解强（DeepSeek V4-Pro） | 0.5-2 元/条 | Kimi K3 |
+| **MODEL_B 审计** | `HISTORY_MODEL_B_*` | skill-2 中英对照、skill-5 A21-A37、skill-4 QA | 视觉模型可同时读中文稿+英文脚本；独立 Provider 保证隔离（GLM-4.1V-Thinking-Flash） | < 1 元/条 | Kimi K3 B 或 DeepSeek-V3 |
+| **MODEL_RESEARCH 考据** | `HISTORY_MODEL_RESEARCH_*` | skill-1 考据爬取+三栏初始分类 | 1M 上下文适合长史料（小米 MiMo V2.5 Pro） | 0.5-2 元/条 | MODEL_A |
+| **MODEL_TTS 配音** | `HISTORY_TTS_*` | skill-2.5 配音 | SSML 停顿/中英混读能力强 | 6-10 元/条 | Qwen3-TTS-Instruct-Flash |
+| **MODEL_VQA 视觉 QA** | `HISTORY_VQA_*` | skill-3 地图预筛、skill-5 A8/A9 | 帧级视频理解 | < 1 元/条 | MODEL_B |
+
+### 4.2 硬约束
+
+1. **MODEL_A 和 MODEL_B 必须是不同实例**（不同 Provider 或同一 Provider 不同端点）。禁止同一个模型既生成又自检。
+2. **所有 Skill 脚本里禁止写死 Provider 名称**。必须用 `process.env.HISTORY_MODEL_X_*` 引用。
+3. **每个 SKILL.md 末尾必须有 `## 模型配置` 章节**，写明：用哪个角色、为什么、降级角色、成本估算。
+4. **`.env` 里的 Provider/Endpoint 可以改**，但改的时候必须同步更新 SKILL.md 的模型配置章节（改角色不改理由，或角色和理由都改）。
+5. **禁止 Skill 脚本里写 `process.env.DEFAULT_MODEL`** 这类模糊引用。
+
+### 4.3 典型违规示例
+
+| 违规 | 正确 |
+|---|---|
+| skill-2 和 skill-5 都用 `deepseek-v4-pro` | skill-2 用 MODEL_A (deepseek-v4-pro)，skill-5 用 MODEL_B (glm-4.1v-thinking-flash) |
+| 脚本里写 `api_key = "sk-deepseek-xxx"` | 脚本里写 `api_key = process.env.HISTORY_MODEL_A_API_KEY` |
+| 所有 Skill 都写"主选 DeepSeek V4-Pro" | 每个 Skill 显式声明自己的角色，只有生成类 Skill 用 MODEL_A |
 
 ---
 

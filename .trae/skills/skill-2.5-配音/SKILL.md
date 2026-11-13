@@ -105,3 +105,10 @@
 
 ## 提示词（见 `resources/voiceover-prompt.txt`）
 SSML 结构已在附录 A-7 给出。
+
+## 模型配置
+- **角色**：MODEL_TTS（`HISTORY_TTS_*`）
+- **为什么**：TTS 是音频生成，与文本大模型分属不同 API 家族。火山引擎支持 SSML 停顿/中英混读，成本可控。
+- **降级**：MODEL_TTS 不可用时切 Qwen3-TTS-Instruct-Flash
+- **成本估算**：8 分钟约 8000 字符 → 6—10 元
+- **纪律**：voice ID 在首条视频前由人类选定并锁定；新专名读法暂停等人类确认，不自行推断。

@@ -21,26 +21,26 @@
 - 文件 frontmatter：`gateStatus: "pending"`
 
 ### source-ledger.json schema
-```json
-{
-  "_schema": "source-ledger.json v1",
-  "_source": "PRD §8.3",
-  "gateStatus": "pending",
-  "entries": [
-    {
-      "claim": "Wu Zetian entered Ganye Temple in 649 CE",
-      "bucket": "known | unknown | inference",
-      "source": "Old Book of Tang, Biography of Empress Wu",
-      "url": "https://...",
-      "license": "public-domain | cc-by | [TBD 待 Gate 2 确认]",
-      "capturedAt": "2026-11-13",
-      "chgisLayer": null,
-      "tgazCoord": null,
-      "notes": "[Gate 2 需确认权利状态]"
-    }
-  ]
-}
-```
+> 完整 schema：`templates/schemas/source-ledger.schema.json`（第四轮审计 FAIL-9 修复）
+> qa.mjs 和 self-check.mjs 按此 schema 读取 gateStatus 和每条 claim。
+
+**顶层字段**（skill-1 必须严格遵循）：
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `gateStatus` | string | `pending` / `passed` / `rejected`（qa.mjs 检查此字段 === `passed` 才放行） |
+| `claims` | array | 三栏考据表。每条 claim 必须有 `claim_id`、`claim_zh`、`status`、`sources` |
+| `meta` | object | 元数据（slug / figure / crawled_at / research_model） |
+
+**每条 claim 必须有**：
+| 字段 | 类型 | 说明 |
+|---|---|---|
+| `claim_id` | string | **锚点 ID**（格式 `claim-001`）。中文逻辑稿每段开头加 `[claim-001]`，英文脚本 MODEL_A 必须保留相同 ID，模型 B 按 claim_id 对齐中英对照（第四轮 FAIL-10 修复） |
+| `claim_zh` | string | 中文 claim 原文 |
+| `status` | enum | `known` / `unknown` / `inference` / `excluded` |
+| `sources[].license_type` | enum | `public-domain` / `cc-by` / `cc-by-sa` / `restricted` / `unknown`。只有前 3 种可以直接引用 |
+| `excluded_reason` | string | status === `excluded` 时必填 |
+
+**不遵循此 schema 的后果**：qa.mjs 会读不到正确的 gateStatus，self-check.mjs 的 A21/A26 锚点对齐会错位。
 
 ## 流程
 1. 读取 Gate 1 选定的人物和问题框架

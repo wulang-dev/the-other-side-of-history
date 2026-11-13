@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "_doc": "第四轮审计 FAIL-9 修复",
+  "_usage": "skill-1 考据产出 source-ledger.json 必须符合此 schema。qa.mjs 和 self-check.mjs 按此读取 gateStatus 和每条 claim。",
+  "type": "object",
+  "required": ["gateStatus", "claims", "meta"],
+  "properties": {
+    "gateStatus": {
+      "type": "string",
+      "enum": ["pending", "passed", "rejected"],
+      "description": "Gate 2 签字后改为 'passed'。qa.mjs 检查此字段 === 'passed' 才放行。"
+    },
+    "claims": {
+      "type": "array",
+      "description": "所有叙事 claim 的三栏表 + 来源台账。每条必须有 claim_id（中文逻辑稿和英文脚本的锚点对齐用）。",
+      "items": {
+        "type": "object",
+        "required": ["claim_id", "claim_zh", "status", "sources"],
+        "properties": {
+          "claim_id": {
+            "type": "string",
+            "description": "锚点 ID，格式 'claim-001'。中文逻辑稿每段开头加 [claim-001]，英文脚本 MODEL_A 必须保留相同 ID 以便模型 B 对齐。"
+          },
+          "claim_zh": {
+            "type": "string",
+            "description": "中文 claim 原文"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["known", "unknown", "inference", "excluded"],
+            "description": "三栏表分类。Gate 2 人类裁决。'excluded' = 无法确认权利状态的来源，被排除出叙事。"
+          },
+          "sources": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": ["正史", "方志", "考古报告", "现代研究", "其他"],
+                  "description": "来源类型"
+                },
+                "title": { "type": "string" },
+                "url": { "type": "string" },
+                "license_type": {
+                  "type": "string",
+                  "enum": ["public-domain", "cc-by", "cc-by-sa", "restricted", "unknown"],
+                  "description": "第四轮审计补充：版权类型。只有 public-domain / cc-by / cc-by-sa 可以直接引用。restricted / unknown 必须标记 excluded。"
+                },
+                "crawled_at": { "type": "string", "format": "date-time" },
+                "notes": { "type": "string" }
+              }
+            }
+          },
+          "excluded_reason": {
+            "type": "string",
+            "description": "仅当 status === 'excluded' 时填写：为什么排除（版权存疑 / 史料矛盾 / 无来源）"
+          }
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "slug": { "type": "string" },
+        "figure": { "type": "string" },
+        "crawled_at": { "type": "string", "format": "date-time" },
+        "research_model": { "type": "string", "description": "MODEL_RESEARCH 角色（Trae 内置 Kimi-K3 或 MiMo）" },
+        "gate2_decision": { "type": "string", "description": "Gate 2 人类裁决摘要" }
+      }
+    }
+  }
+}

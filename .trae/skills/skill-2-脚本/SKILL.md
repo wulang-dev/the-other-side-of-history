@@ -77,7 +77,42 @@
 3. 模型 B 执行中英对照 + 关键句回译（检测立场偏移）
 4. H9 签字依据：AI 自检报告 + 关键句回译 + TTS 听感
 
-## 英文质量约束（硬性）
+### 🆕 第四轮审计 FAIL-10 修复：claim 锚点对齐机制
+
+**问题**：模型 B 中英对照自检的核心是"把中文逻辑稿的每一段 claim 和英文脚本的对应段 claim 逐个比对"。如果没有锚点，靠段落顺序对齐会在 MODEL_A 合并/拆分段落时错位。
+
+**修复机制**：三步锚点纪律
+
+#### Step 1：中文逻辑稿必须加 claim 锚点
+中文逻辑脚本每段开头加唯一 `[claim-NNN]` 标记：
+```
+[claim-001] 武则天 649 年太宗去世后入感业寺为尼
+[claim-002] 高宗 650 年继位，面临后宫权力真空
+[claim-003] ...
+```
+**锚点必须在 source-ledger.json 的 claims[].claim_id 里一一对应**（skill-1 产出的 source-ledger.json 已经用 claim_id 了）。
+
+#### Step 2：模型 A 生成英文时必须保留锚点
+MODEL_A 的生成提示词里**强制**：
+> "每个 claim 锚点 `[claim-NNN]` 必须保留在英文脚本里，位置在该 claim 的英文翻译段落开头。禁止合并/拆分/删除任何锚点。"
+
+英文脚本里的锚点看起来像：
+```markdown
+## Section 1 — Hook (0:00–0:30)
+[claim-001] [MAP] In 649 CE, Wu Zetian entered a Buddhist temple...
+[claim-002] Emperor Gaozong took the throne a year later...
+```
+
+#### Step 3：模型 B 中英对照按锚点对齐
+模型 B 拿三份输入：① 中文逻辑稿（带 claim 锚点）② source-ledger.json（每条 claim 的 known/unknown/excluded 状态）③ 英文脚本（带 claim 锚点）。按 claim_id 逐个比对：
+
+| claim_id | 中文 claim | 英文 claim 原文 | status | 检查项 |
+|---|---|---|---|---|
+| claim-001 | 武则天 649 年入感业寺 | In 649 CE, Wu Zetian entered Ganye Temple | known | 立场偏移？因果简化？道德史观残留？ |
+
+**锚点数量不等 → 直接 FAIL**（MODEL_A 丢失或新增了 claim，需要重写）。
+
+### script.md 结构（更新版）
 | 指标 | 目标 |
 |---|---|
 | Flesch-Kincaid Grade Level | 7—9 |

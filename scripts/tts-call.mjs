@@ -31,8 +31,40 @@ function loadEnv() {
 const env = loadEnv();
 const APPID = env.VOLC_TTS_APPID;
 const TOKEN = env.VOLC_TTS_ACCESS_TOKEN;
+const TOKEN_EXPIRES_AT = env.VOLC_TTS_TOKEN_EXPIRES_AT; // WARN-14 过期检查
 const VOICE_ID = env.VOLC_TTS_VOICE_ID || 'tts-xxx';   // 首条视频前人类选定
 const CLUSTER = env.VOLC_TTS_CLUSTER || 'volcano_tts';
+
+// === WARN-14: Token 过期检查 ===
+function checkTokenExpiry() {
+  if (!TOKEN_EXPIRES_AT) {
+    console.log('⚠️  VOLC_TTS_TOKEN_EXPIRES_AT 未设置（建议在 .env 里填过期时间）');
+    console.log('   火山引擎 AccessToken 有效期 24 小时，过期后 TTS 调用会失败。');
+    return;
+  }
+  const expiryMs = new Date(TOKEN_EXPIRES_AT).getTime();
+  if (isNaN(expiryMs)) {
+    console.log(`⚠️  VOLC_TTS_TOKEN_EXPIRES_AT 格式无效: "${TOKEN_EXPIRES_AT}"`);
+    console.log('   期望格式: YYYY-MM-DDTHH:MM:SS+08:00');
+    return;
+  }
+  const now = Date.now();
+  const remainingMs = expiryMs - now;
+  const remainingH = remainingMs / (1000 * 60 * 60);
+  if (remainingMs < 0) {
+    console.error(`\n❌ 火山引擎 AccessToken 已过期 ${Math.abs(remainingH).toFixed(1)} 小时！`);
+    console.error('   请在火山控制台刷新 Token，然后更新 .env：');
+    console.error('   VOLC_TTS_ACCESS_TOKEN=<新Token>');
+    console.error('   VOLC_TTS_TOKEN_EXPIRES_AT=<新过期时间>');
+    process.exit(1);
+  } else if (remainingH < 2) {
+    console.log(`⚠️  AccessToken 即将过期！剩余 ${remainingH.toFixed(1)} 小时。`);
+    console.log('   建议刷新 Token 后更新 .env 里的 VOLC_TTS_ACCESS_TOKEN 和 VOLC_TTS_TOKEN_EXPIRES_AT');
+  } else {
+    console.log(`✅ AccessToken 有效期内，剩余 ${remainingH.toFixed(1)} 小时`);
+  }
+}
+checkTokenExpiry();
 
 const args = Object.fromEntries(
   process.argv.slice(2).map((a, i, arr) => {

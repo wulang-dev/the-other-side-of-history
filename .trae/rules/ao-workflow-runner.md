@@ -87,6 +87,12 @@ Trae 内置模型在 IDE 右下角点模型名切换，**不是脚本调用 API*
 #### 会话 C（MODEL_B 审计角色）⚠️ 自审自判硬禁区
 **必须新开 Trae 会话、切到不同 Provider 的 MODEL_B**。处理：skill-2 中英对照自检 + skill-5 A21-A37 成片自检 + skill-4 QA 最终检查。
 
+#### skill-2.5 配音（独立 API 调用，不占 Trae 会话）
+skill-2.5 是**火山引擎 OpenSpeech API 调用**，不依赖 Trae 文本模型。所以：
+- **不需要模型隔离**（不做文本生成/审计，只做语音合成）
+- **人类阻塞点**（音色试听 + 新专名读法 + 钩子/代价/结尾三段签字）可以在任何 Trae 会话里完成
+- 实操上建议放在 **会话 B（考据会话）之后**、**会话 C（审计会话）之前**——因为配音需要 Gate 3 通过后的最终脚本，不需要审核上下文
+
 **🔴 违规后果（硬暂停级）**：如果 skill-2 英文生成（会话 A）和 skill-5 自检（会话 C）在**同一次 Trae 会话**、**同一个模型**下完成 → 自审自判 → **该条视频自检报告作废，Gate 3 重审，脚本重写**。
 
 **为什么这么重**：PRD §21.2 模型隔离硬约束的本质是"让两个独立的 AI 实例各自判断，避免同一个模型的盲区"。Trae 内置模型切换如果只在 IDE 右下角点一下，**无法 100% 确认模型实例真的换了**——关闭会话 + 新开是唯一可靠的"模型上下文清零"方式。
@@ -178,18 +184,22 @@ A33-A37（前 3 秒钩子兑现 / 30 秒开环 / 60-90 秒 re-hook / 代价碎�
 
 ## 10. AI 披露 + 标题缩略图 A/B（审计 WARN-7 + WARN-9 修复项）
 
-### 10.1 AI 披露固定模板（A17 机械检查依据）
+### 10.1 AI 披露固定模板（A17 机械检查依据 + WARN-11 修复）
 
 YouTube Studio 视频简介**开头必须**包含以下声明（精确文本，不增不减）：
 
 ```
-🎓 History videos made by a human creator with AI assistance for research, visuals, and voiceover. All historical judgments and narrative structure are decided by the human creator before publication.
+🎓 History videos made by a human creator with AI assistance for research, visuals, and voiceover. All historical judgments, framing, and narrative structure are decided by the human creator before publication. Voiceover uses a commercial text-to-speech service with a custom voice profile.
 ```
+
+**为什么加 "Voiceover uses a commercial text-to-speech service with a custom voice profile"**（WARN-11）：
+1. 明确不是 AI 克隆某个人的声音——你在火山引擎选定的音色是商业 TTS 提供的预设音色，不是模仿真人
+2. 回应 YouTube 审核对 "AI voiceover" 的追问——如果只有 "voiceover" 没有说明，审核可能标记为未披露 AI 语音
 
 **纪律**：
 - 放在简介**第一行**，不是中间或末尾
 - 标题/缩略图**严禁**出现 "AI" / "GPT" / "ChatGPT" 作为卖点（与 §11.4 一致）
-- skill-5 A17 自动检查简介开头是否有这段文本 → 没有则 FAIL
+- skill-5 A17 自动检查简介开头是否有这段文本 → 没有则 FAIL；只有核心声明缺 voiceover 句 → WARN
 
 ### 10.2 标题 + 缩略图同时 A/B 测试
 

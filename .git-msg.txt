@@ -1,0 +1,33 @@
+fix: 第三轮审计 3 FAIL + 4 WARN 修复（代码层对齐）
+
+P0-FAIL-7 V7 黑名单一致性:
+- preflight-gate-check.mjs 去掉 毛泽东（1976 年去世，属历史人物）
+- 解决代码比规则严格导致合法标题错杀的问题
+
+P0-FAIL-6 self-check.mjs 重写（核心工程）:
+- 所有语义扫描检查从 WARN 占位升级为真实实现
+- A21 叙事残留: 读取 narrative-residue-blacklist.json（10 框架）
+  每 1000 词 >= 2 次 FAIL / = 1 次 WARN
+- A26 中式英语: 读取 chinese-english-interference-dictionary.json（10 陷阱）
+  扫描优先级 C2/C3/C4/C9/C10
+- A17 AI 披露: RULES 10.1 精确模板匹配（含 voiceover 说明）
+- A2b source-ledger + A2c preflight gateStatus 覆盖
+
+P1-FAIL-8 skill-2.5 会话归属:
+- rules 4.2 明确是独立 API 调用，不占 Trae 会话
+- 不需要模型隔离（纯 TTS）
+
+P1-WARN-11 AI 披露模板更新:
+- 加 Voiceover uses a commercial text-to-speech service 说明
+- 回应 YouTube 审核追问
+
+P2-WARN-13 CE/BCE 统一:
+- proper-noun-intro-templates.md 开头加统一规定
+
+P2-WARN-14 TTS Token 过期处理:
+- .env 加 VOLC_TTS_TOKEN_EXPIRES_AT
+- tts-call.mjs 启动时检查过期
+
+核心发现：前两轮审计只做了规则层和数据层，没做代码层
+grep scripts 发现两个黑名单 JSON 根本没被引用
+本轮修复把质量网从纸面变成实际可执行代码

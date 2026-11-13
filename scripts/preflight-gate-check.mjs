@@ -73,7 +73,7 @@ if (fs.existsSync(preflightMdPath)) {
 
 // === 自动化检测函数 ===
 const titleBlacklist = ['传奇', '一生', '风云', '秘史', '真相大白', '惊天秘密', '不敢相信', '震惊', '揭秘', '真相', '被掩盖'];
-const politicalKeywords = ['习近平', '中国共产党', '共产党', '台湾', '香港', '西藏', '新疆', '天安门', '六四', '毛泽东']; // §11.4 V7 当代政治
+const politicalKeywords = ['习近平', '中国共产党', '共产党', '台湾', '香港', '西藏', '新疆', '天安门', '六四']; // RULES §8 V7 当代政治红线：只包含 2020 年后当代领导人/地名（毛泽东 1976 年去世，属历史人物，不在此列）
 const aiKeywords = ['AI', '人工智能', 'GPT', 'ChatGPT', '大模型', '算法']; // §12.4 禁止缩略图出现 AI 字样
 const violenceKeywords = ['massacre', 'torture', 'behead', 'beheaded', 'burned', 'burning', 'bloodbath', 'genocide', 'slaughter', '斩首', '屠杀', '酷刑', '焚城']; // RULES §9 V2 暴力呈现边界
 

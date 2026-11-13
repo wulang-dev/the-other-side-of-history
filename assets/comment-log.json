@@ -1,0 +1,9 @@
+{
+  "_schema": "assets/comment-log.json v1",
+  "_source": "PRD §25.4 评论反馈回流",
+  "_rules": [
+    "每条视频发布满 14 天后导出 Top20 高互动评论",
+    "每周更新；每月复盘负面指标趋势"
+  ],
+  "episodes": []
+}

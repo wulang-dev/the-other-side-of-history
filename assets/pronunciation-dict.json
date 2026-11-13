@@ -1,0 +1,17 @@
+{
+  "_schema": "assets/pronunciation-dict.json v1",
+  "_source": "PRD 附录 A-1",
+  "_rules": [
+    "首条视频前，空数组即可",
+    "新词条在 skill-2.5 配音时暂停等人类确认（§15.7）",
+    "IPA 优先；标注来源（如：首集确认/维基/母语朋友）",
+    "禁止 AI 自行填充无人类确认的词条"
+  ],
+  "entries": [
+    {
+      "term": "Wu Zetian",
+      "ipa": "wuː dzəˈtjɛn",
+      "note": "武则天，首集确认读音 [TBD 首条视频前确认]"
+    }
+  ]
+}

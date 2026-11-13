@@ -1,0 +1,9 @@
+{
+  "_schema": "assets/source-index.json v1",
+  "_source": "PRD §22.2 来源查重索引",
+  "_rules": [
+    "每次爬取或新增来源时检查是否已登记",
+    "url 作为唯一键；license 不明确的默认排除"
+  ],
+  "entries": []
+}

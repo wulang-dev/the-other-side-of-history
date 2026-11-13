@@ -1,0 +1,70 @@
+# The Other Side of History — 视频流水线工作流声明
+# PRD v13.0 §20.3 完整拷贝
+# 注意：此文件仅为声明层，实际暂停纪律由 .trae/rules/ao-workflow-runner.md 强制执行
+
+name: "中国历史人物讲解视频流水线"
+inputs:
+  - name: candidate_figures
+    required: true
+  - name: stage
+    required: true
+
+steps:
+  - id: preflight
+    skill: "skill-0-预调研"
+    output: preflight_report
+
+  - id: gate1
+    type: human_gate
+    depends_on: [preflight]
+    task: "Gate 1：选定人物、问题框架、候选标题、候选缩略图、风险等级、叙事逻辑转换方案、价值观边界、赞助兼容性、留存结构方案、系列格式归属。标题须通过 11.4 自检；缩略图须通过 12.4 自检。确认后输入 'Gate 1 通过'"
+
+  - id: research
+    skill: "skill-1-考据整理"
+    depends_on: [gate1]
+    output: research_output
+
+  - id: gate2
+    type: human_gate
+    depends_on: [research]
+    task: "Gate 2：逐条裁决 known/unknown/inference。确认后输入 'Gate 2 通过'"
+
+  - id: script
+    skill: "skill-2-脚本生成"
+    depends_on: [gate2]
+    output: script_draft
+
+  - id: gate3
+    type: human_gate
+    depends_on: [script]
+    task: "Gate 3：重写'代价'段落；标题定稿通过 11.4；缩略图定稿通过 12.4；N1-N10 和 V1-V10 逐项检查并对照样例库 2 项；E1-E5 和 C1-C10 逐项检查；A33-A37 留存结构审查；系列格式判断。记录 narrativeLogicCheck、valuesCheck、englishQualityCheck。确认后输入 'Gate 3 通过'"
+
+  - id: voiceover
+    skill: "skill-2.5-配音"
+    depends_on: [gate3]
+    output: voiceover_manifest
+
+  - id: visual
+    skill: "skill-3-视觉流水线"
+    depends_on: [voiceover]
+    output: rough_cut
+
+  - id: subtitle_upload
+    type: manual
+    depends_on: [voiceover]
+    task: "在 YouTube Studio 上传 SRT 软字幕，覆盖自动字幕"
+
+  - id: selfcheck
+    skill: "skill-5-成片自检"
+    depends_on: [visual, subtitle_upload]
+    output: selfcheck_report
+
+  - id: human_selfcheck
+    type: human_gate
+    depends_on: [selfcheck]
+    task: "人工自检 H1-H10 逐项签字。未签字不得发布"
+
+  - id: final_qa
+    skill: "skill-4-QA"
+    depends_on: [human_selfcheck]
+    output: qa_report

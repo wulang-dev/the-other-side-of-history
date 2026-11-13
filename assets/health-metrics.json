@@ -1,0 +1,10 @@
+{
+  "_schema": "assets/health-metrics.json v1",
+  "_source": "PRD §28.2 负面监控指标",
+  "_rules": [
+    "每周更新；每月复盘趋势",
+    "连续 2 个月超标触发频道健康度复盘",
+    "指标定义见 §28.2 表格"
+  ],
+  "weeklyChecks": []
+}

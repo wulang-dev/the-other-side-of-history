@@ -1,0 +1,43 @@
+# === The Other Side of History .gitignore ===
+# Project: YouTube 中国历史人物讲解频道 PRD v13.0 §21.4
+
+# === Credentials ===
+.env
+.env.local
+.env.*.local
+
+# === Episode raw artifacts (keep only final JSON/md) ===
+episodes/*/raw/
+episodes/*/audio/
+episodes/*/video/
+episodes/*/temp/
+episodes/*/*.wav
+episodes/*/*.mp3
+episodes/*/*.mp4
+episodes/*/*.mov
+episodes/*/ffmpeg-*.log
+
+# === Node / Python caches ===
+node_modules/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.venv/
+venv/
+
+# === IDE ===
+.vs/
+.vscode/settings.json
+.vscode/launch.json
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+
+# === Build / temp ===
+dist/
+build/
+*.log
+*.tmp
+.trae/documents/

@@ -1,0 +1,10 @@
+{
+  "_schema": "assets/selfcheck-history.json v1",
+  "_source": "PRD §17.5 自检历史",
+  "_rules": [
+    "每条视频自检完成后追加一条",
+    "通过数 = 非 FAIL 项数；A29 预留不计",
+    "firstPassRate = (首次全部 PASS 的视频数) / 总视频数"
+  ],
+  "episodes": []
+}

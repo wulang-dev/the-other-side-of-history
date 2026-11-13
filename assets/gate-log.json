@@ -1,0 +1,11 @@
+{
+  "_schema": "assets/gate-log.json v1",
+  "_source": "PRD §23.3 + §18 三道门",
+  "_rules": [
+    "每次 Gate 通过后追加一条",
+    "decision: 人类最终选择（如 '选武则天，问题框架=被政治性存放的人如何回来'）",
+    "reasoning: 决策理由（可引用预调研哪部分）",
+    "timestamp: ISO 8601"
+  ],
+  "entries": []
+}

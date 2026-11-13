@@ -1,0 +1,13 @@
+{
+  "_schema": "assets/topic-index.json v1",
+  "_source": "PRD §21.5 跨视频选题库",
+  "_rules": [
+    "每条视频完成后追加一条",
+    "risk: 低风险开篇 / 中风险 / 高风险（§5.2）",
+    "narrativeLogicSummary: 一句话说明用了哪些 N 框架转换",
+    "sponsorshipFit: 适合 / 不适合 / 需谨慎（§26.3）",
+    "seriesFormat: 归入的系列问题格式，或 '新建'（§28.3.5）",
+    "titleTemplate: 用了 §11.3 的哪套模板编号"
+  ],
+  "entries": []
+}

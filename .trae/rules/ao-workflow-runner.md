@@ -6,11 +6,17 @@
 
 ## 1. 三道门硬暂停纪律
 
-### 1.1 Gate 1 — 选题裁决
-**暂停条件**：skill-0 预调研输出 `preflight-research.md` 后立即暂停。  
-**不可自动化**：人物、问题框架、候选标题、候选缩略图、风险等级、叙事逻辑转换方案、价值观边界、赞助兼容性、留存结构方案、系列格式归属 — 全部人类裁决。  
-**通过条件**：人类在 Gate 1 打印版（`templates/gates/gate-1-topic.md`）逐项签字，`preflight-research.md` 的 `gateStatus` 字段由 `"pending"` 改为 `"passed"`。  
-**标题/缩略图硬约束**：候选标题必须通过 §11.4 自检清单；候选缩略图必须通过 §12.4 自检清单。任何一项未过，Gate 1 不通过。
+### 1.1 Gate 1 — 选题裁决（AskUserQuestion 交互版）
+**暂停条件**：skill-0 预调研输出 `preflight-research.md` + gate-check 通过后立即暂停。
+**交互方式**：**必须用 AskUserQuestion 逐项交互选择**，不是让用户在聊天框里手打 checklist。每轮 1-2 个问题，不超过 4 个选项。MODEL_A 子 agent 填充时已经在 preflight §4/§5/§8/§10 给出了推荐选项和理由，AskUserQuestion 直接消费这些选项。
+**交互顺序**（4 轮 AskUserQuestion）：
+- **轮 1 — 核心钩子**：① 问题框架 3 选 1 + ② 候选标题 3 选 1（这两项决定整条视频的调性，放第一轮）
+- **轮 2 — 视觉+风险**：① 候选缩略图 2 选 1 + ② 风险等级（🟡/🟢/🔴 接受）
+- **轮 3 — 边界+赞助**：① 价值观边界（接受报告默认 / 改 V8 / 改 V10 / 全改） + ② 赞助兼容性（⚠️需谨慎 接受 / 换角度避开杀亲 / 不考虑赞助）
+- **轮 4 — 结构+格式**：① 留存结构（接受报告默认 / 修改钩子位置 / 修改代价碎片） + ② 系列格式（新建 / 归现有） + ③ 系列问题格式 + ④ 叙事逻辑转换
+**通过条件**：4 轮交互全部完成 → Agent 把用户选择写回 preflight-research.md 的 Gate 1 清单部分 → `gateStatus` 从 `"pending"` 改为 `"passed"` → 自动推进到 skill-1 考据。
+**例外**：用户显式说"全用推荐"时，跳过 4 轮逐项交互，Agent 直接把每一项的第 1 推荐项写入 gateStatus。
+**标题/缩略图硬约束**：候选标题必须通过 §11.4 自检清单；候选缩略图必须通过 §12.4 自检清单。任何一项未过，Gate 1 不通过（AskUserQuestion 里要标注"此选项未过自检"）。
 
 ### 1.2 Gate 2 — 史料边界裁决
 **暂停条件**：skill-1 考据输出 `source-ledger.json` 和三栏表后立即暂停。  
@@ -37,6 +43,12 @@ valuesCheck: "passed"
 englishQualityCheck: "passed"
 ```
 且上述字段的审查备注不为空。
+
+### 1.4 skill-0 preflight 自动填充纪律（硬默认）
+**触发条件**：`node scripts/preflight.mjs` 生成骨架（10 部分全是 `[TBD]`）后，**立即自动启动 MODEL_A Task 子 agent 填充，不询问用户选择"路线 A/B/C"**。
+**执行方式**：启动 `general_purpose_task` 子 agent（独立上下文 = 方案 A 模型隔离），prompt 模板在 `assets/prompts/preflight-fill.txt`。
+**填充后动作**：子 agent 写回文件 → 自动跑 `node scripts/preflight-gate-check.mjs --episode <slug>` 扫 [TBD] → 输出 Gate 1 人类裁决清单 → **暂停等待人类签字**。
+**例外**：用户显式说"先别填" / "停在骨架" / "手动填" 时跳过自动填充。
 
 ---
 
@@ -76,27 +88,74 @@ englishQualityCheck: "passed"
 
 ### 4.2 Trae 内置模型切换纪律（硬暂停级要求）
 
-Trae 内置模型在 IDE 右下角点模型名切换，**不是脚本调用 API**。以下是**会话级隔离**要求，不只是"切一下模型"：
+Trae 内置模型在 IDE 右下角点模型名切换，**不是脚本调用 API**。以下是**三级隔离方案**，按阶段选择：
 
-#### 会话 A（MODEL_A 生成角色）
-处理 skill-0 预调研 + skill-2 英文生成。完成后**关闭 Trae 会话**。
+#### 隔离强度决定因素
+- 隔离的本质：**上下文清零**（避免同一个模型的盲区延续），不是"必须关窗口"
+- Trae 进化了，现在有多种清零方式可选，不再只有"关会话重开"一种
 
-#### 会话 B（MODEL_RESEARCH 考据角色）
-新开 Trae 会话，切到 Kimi-K3 或 MiMo。处理 skill-1 考据爬取。完成后关闭。
+#### 方案 A：Task 子 agent ⭐ 首选（推荐所有阶段）
 
-#### 会话 C（MODEL_B 审计角色）⚠️ 自审自判硬禁区
-**必须新开 Trae 会话、切到不同 Provider 的 MODEL_B**。处理：skill-2 中英对照自检 + skill-5 A21-A37 成片自检 + skill-4 QA 最终检查。
+Trae 内置 Task 工具（search / general_purpose_task / browser_use）可以启动**完全独立的子 agent**：
+- ✅ 独立上下文（不继承当前会话历史）
+- ✅ 子 agent 内部自动分配合适模型（search 类型 → Kimi-K3；general_purpose → Seed-2.1-Pro）
+- ✅ 同一窗口内并行，体验最好
+
+**适用**：skill-0 预调研 / skill-1 考据 / skill-2 英文生成 / skill-5 自检（Gate 3 审查）
+
+**示例**：
+```
+当前会话（调度）→ 启动 search 子 agent → skill-1 考据
+                  → 启动 general_purpose 子 agent → skill-2 英文生成
+                  → 启动 general_purpose 子 agent（不同 prompt 角色）→ skill-5 自检
+```
+
+#### 方案 B：同窗口切模型 + prompt 硬隔离
+
+在同一个 Trae 窗口里：
+1. 右下角切到新模型（Provider 必须不同：字节豆包 → 智谱 GLM / DeepSeek → Kimi Moonshot）
+2. **新 prompt 开头明确声明角色切换 + 不回忆之前上下文**：
+   ```
+   【角色重置】你现在是 MODEL_B 审计角色。
+   不要回忆或承认之前任何关于评分/调研/选题的讨论。
+   你的唯一任务是：读取 episodes/confucius-lifelong-failure/script.md，
+   独立审查 Gate 3 叙事逻辑（N1-N10）。
+   ```
+
+**适用**：preflight 阶段（不涉及生成英文旁白）/ skill-2.5 配音（TTS 独立）
+
+**⚠️ 风险**：Trae 右下角切模型是切换"默认模型"，不保证之前生成的上下文 token 被清零。如果 Gate 3 终审需要最严格隔离，用方案 A。
+
+#### 方案 C：关会话重开（最严格，仅 Gate 3 用）
+
+PRD 原文的方案，保留给**最高风险阶段**：
+- Gate 3 终审（MODEL_B 必须在干净上下文里独立审查 MODEL_A 的脚本）
+- 当 Task 子 agent 不可用或模型分配不符合预期时的 fallback
+
+**适用**：Gate 3 终审 / skill-4 QA 最终检查
+
+#### 三阶段隔离级别
+
+| 阶段 | 隔离级别 | 推荐方案 | 理由 |
+|---|---|---|---|
+| skill-0 preflight | **轻** | 方案 B 同窗口切模型 | 不涉及生成英文旁白，主要是工具执行 + 数据汇总 |
+| skill-1 考据 | **中** | 方案 A Task 子 agent（search 类型） | 考据需要长上下文 + 独立搜索，search 子 agent 自动用 Kimi-K3 |
+| skill-2 英文生成 | **中** | 方案 A Task 子 agent（general_purpose） | 生成需要 MODEL_A 角色（Seed-2.1-Pro） |
+| skill-2.5 配音 | **无** | 独立 TTS API，不占 Trae 会话 | 不做文本生成/审计，只做语音合成 |
+| Gate 3 终审 | **重** | 方案 A Task 子 agent + 切 MODEL_B Provider | MODEL_B 必须独立审查 MODEL_A 的脚本，上下文必须干净 |
+| skill-4 QA | **重** | 方案 A Task 子 agent + 切 MODEL_B Provider | 最终质量闸 |
 
 #### skill-2.5 配音（独立 API 调用，不占 Trae 会话）
+
 skill-2.5 是**火山引擎 OpenSpeech API 调用**，不依赖 Trae 文本模型。所以：
 - **不需要模型隔离**（不做文本生成/审计，只做语音合成）
 - **人类阻塞点**（音色试听 + 新专名读法 + 钩子/代价/结尾三段签字）可以在任何 Trae 会话里完成
-- 实操上建议放在 **会话 B（考据会话）之后**、**会话 C（审计会话）之前**——因为配音需要 Gate 3 通过后的最终脚本，不需要审核上下文
+- 实操上建议放在 **skill-1 考据之后**、**skill-2 脚本生成之后**——因为配音需要 Gate 3 通过后的最终脚本
 - 🔒 WARN-15：新专名 IPA 确认用**当前会话任意模型均可**（IPA 是事实性查询，不涉及叙事判断。可以让 Trae 当前模型查 IPA 推荐，或手动查）
 
-**🔴 违规后果（硬暂停级）**：如果 skill-2 英文生成（会话 A）和 skill-5 自检（会话 C）在**同一次 Trae 会话**、**同一个模型**下完成 → 自审自判 → **该条视频自检报告作废，Gate 3 重审，脚本重写**。
+**🔴 违规后果（硬暂停级）**：如果 skill-2 英文生成（MODEL_A）和 skill-5 自检（MODEL_B）在**同一个上下文**（不是同一个模型，是同一个上下文）下完成 → 自审自判 → **该条视频自检报告作废，Gate 3 重审，脚本重写**。
 
-**为什么这么重**：PRD §21.2 模型隔离硬约束的本质是"让两个独立的 AI 实例各自判断，避免同一个模型的盲区"。Trae 内置模型切换如果只在 IDE 右下角点一下，**无法 100% 确认模型实例真的换了**——关闭会话 + 新开是唯一可靠的"模型上下文清零"方式。
+**本质**：隔离的目的是"让两个独立的 AI 实例各自判断"。方案 A（Task 子 agent）天然满足，方案 B（同窗口切模型）在 preflight 阶段足够，Gate 3 必须用方案 A 或 C。
 
 ### 4.3 硬约束
 

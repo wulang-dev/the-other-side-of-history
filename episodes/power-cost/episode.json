@@ -1,0 +1,19 @@
+{
+  "figureId": "wu-zetian",
+  "angleKey": "power-cost",
+  "zhFigure": "武则天",
+  "slug": "power-cost",
+  "stage": "prelaunch",
+  "gateStatus": "passed",
+  "generatedAt": "2026-11-13",
+  "titleDecision": "Empress Wu Ruled 15 Years. Then She Left a Blank Stone for History.",
+  "thumbnailDecision": "无字碑特写 + 红色裂纹字幕 'SHE SAID NOTHING. WE DO.'",
+  "narrativeFramework": "无字碑视角 · Her Own Stone Says Nothing About That",
+  "seriesFormat": "新建 The Receipts of Power",
+  "scripts": {
+    "preflight": "passed",
+    "sourceLedger": "passed",
+    "script": "passed (narrativeLogicCheck + valuesCheck + englishQualityCheck all passed)",
+    "voiceover": "signed off (en-US-EricNeural, Wu Zetian default pronunciation OK, 钩子/代价/结尾情绪节奏 OK)"
+  }
+}

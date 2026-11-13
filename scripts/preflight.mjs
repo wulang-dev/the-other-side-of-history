@@ -21,19 +21,29 @@ const args = Object.fromEntries(
 );
 
 const figure = args.figure || args.f;
+const figureId = args.figureId || args['figure-id'];
+const angleKey = args.angleKey || args['angle-key'];
 const stage = args.stage || args.s || 'prelaunch';
 const sourceLevel = args['source-level'] || args.source || 'direct';
 
 if (!figure) {
-  console.error('用法: node preflight.mjs --figure <中文名> --stage <prelaunch|growth|mature> [--source-level <direct|degraded|manual>]');
+  console.error('用法: node preflight.mjs --figure <中文名> [--figureId <slug>] [--angleKey <angle-slug>] --stage <prelaunch|growth|mature>');
   process.exit(1);
 }
 
-// slug 生成规则：中文名拼音 + 年份（如果有）。M0 先用英文近似占位，M1 接入真实拼音库或由 MODEL_A 生成
-const safeFigure = figure
-  .replace(/[\u4e00-\u9fa5]/g, 'history-figure')   // 汉字替换为占位（M1 由 AI 给真实拼音 slug）
-  .replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '-').replace(/-+/g, '-').slice(0, 30);
-const slug = (safeFigure || 'history-figure') + '-' + Date.now().toString().slice(-6);
+// slug 优先级：angleKey > figureId > 自动生成
+// angleKey 是 JSON 里预定义的（如 confucius-lifelong-failure），最干净
+// 否则用 figureId（如 confucius），都没有才 fallback 到自动生成
+let slug;
+if (angleKey) {
+  slug = angleKey;
+} else if (figureId) {
+  slug = figureId;
+} else {
+  slug = figure
+    .replace(/[\u4e00-\u9fa5]/g, 'figure')
+    .replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, '-').replace(/-+/g, '-').slice(0, 30);
+}
 const epDir = path.join(ROOT, 'episodes', slug);
 fs.mkdirSync(epDir, { recursive: true });
 
@@ -55,7 +65,7 @@ const preflightMd = `# 预调研报告 — ${figure}
 
 ## 1. 史料可得性
 [TBD M1 接入 MODEL_A 后填充]
-- 正史原文：《旧唐书·卷六·则天皇后本纪》可直连 → 有史料锚点
+- 正史原文：[TBD — 哪部正史哪几卷可直连]
 - 方志：[TBD]
 - 考古：[TBD]
 - 史料可得性评级：✅ 充足 / ⚠️ 有部分空白 / ❌ 严重空白

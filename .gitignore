@@ -40,3 +40,15 @@ dist/
 build/
 *.log
 *.tmp
+
+# === Temp debug scripts (one-off, not part of the pipeline) ===
+_debug-*.*
+_audit-*.*
+_score-*.*
+_test-*.*
+_check-*.*
+_calc-*.*
+_add-hints.*
+yunzhou20-test.srt
+.git-msg.txt
+*.bak

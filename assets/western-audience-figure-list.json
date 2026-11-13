@@ -1,0 +1,551 @@
+{
+  "_meta": {
+    "version": "1.0",
+    "generatedAt": "2026-11-13",
+    "description": "Figures of Chinese history that Western (English-speaking) audiences care about. Data sources: WebSearch snippets + WikiRank + YouTube search results.",
+    "dedupLogic": "topic-discovery.mjs scans episodes/*/episode.json for {figureId, angleKey, gateStatus: passed}, and also reads _dedupRegistry below."
+  },
+  "_dedupRegistry": {},
+  "figures": [
+    {
+      "figureId": "qin-shi-huang",
+      "zhName": "秦始皇",
+      "enName": "Qin Shi Huang",
+      "timePeriod": "221-210 BCE",
+      "role": "Emperor",
+      "westernNotabilityTier": "S",
+      "evidence": {
+        "wikiQuality": "WikiRank good, English wiki ~8000 words",
+        "youtubeTopViews": [
+          "Timeline 3.1M",
+          "TED-Ed Terracotta Warriors 4.7M",
+          "d b 4.6M",
+          "Odyssey 560K"
+        ],
+        "searchDemand": "Google Trends stable, terracotta warriors related searches even higher"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "immortality-obsession",
+          "zhAngle": "The cost of seeking immortality",
+          "enHook": "He unified China. Then spent 10 years trying not to die.",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        },
+        {
+          "angleKey": "legalism-nightmare",
+          "zhAngle": "Why his dynasty lasted only 15 years",
+          "enHook": "He built the Great Wall and burned all books. Why did his dynasty collapse so fast?",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        },
+        {
+          "angleKey": "afterlife-army",
+          "zhAngle": "Why 8000 soldiers were buried with him",
+          "enHook": "Why did one emperor bury 8,000 soldiers with him?",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        }
+      ],
+      "badAngles": [
+        "generic biography (done to death on Timeline 4.6M)"
+      ],
+      "riskLevel": 1,
+      "sourceAvailability": 5
+    },
+    {
+      "figureId": "wu-zetian",
+      "zhName": "武则天",
+      "enName": "Wu Zetian",
+      "timePeriod": "624-705 CE",
+      "role": "Only female emperor",
+      "westernNotabilityTier": "S",
+      "evidence": {
+        "wikiQuality": "WikiRank good, ~10000 words, 4 candidate wiki entries",
+        "youtubeTopViews": [
+          "Timeline 3.6M",
+          "Historically 1.8M",
+          "Absolute History 228K + 85K"
+        ],
+        "searchDemand": "Top 3 most recognizable Chinese historical figures in English world (after Qin Shi Huang, Confucius)"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "power-cost",
+          "zhAngle": "What she lost to gain power",
+          "enHook": "She ruled China for 15 years. But what did she lose to get there?",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        },
+        {
+          "angleKey": "female-emperor-paradox",
+          "zhAngle": "Why she was the only female emperor ever",
+          "enHook": "China had 24 emperors named Wu. Why was she the only one called Empress?",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        },
+        {
+          "angleKey": "secret-police",
+          "zhAngle": "Her secret police and informer network",
+          "enHook": "How did a Buddhist nun become China's most feared ruler?",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        }
+      ],
+      "badAngles": [
+        "generic biography (everyone does it, crowded market)"
+      ],
+      "riskLevel": 2,
+      "sourceAvailability": 5
+    },
+    {
+      "figureId": "genghis-khan",
+      "zhName": "成吉思汗",
+      "enName": "Genghis Khan",
+      "timePeriod": "1162-1227 CE",
+      "role": "Mongol empire founder",
+      "westernNotabilityTier": "S",
+      "evidence": {
+        "wikiQuality": "WikiRank top tier, ~15000 words",
+        "youtubeTopViews": [
+          "Timeline 5.2M",
+          "Kings and Generals multi-ep each 1-3M",
+          "History Channel 4.1M"
+        ],
+        "searchDemand": "Most recognizable China-related historical figure, but usually categorized as world/war history"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "mongol-rule-china",
+          "zhAngle": "He conquered China, his grandson founded Yuan",
+          "enHook": "Genghis Khan conquered half the world. But his grandson became China's emperor.",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 3 个现有视频 → 此角度零竞品"
+        },
+        {
+          "angleKey": "mongol-empire-collapse",
+          "zhAngle": "Why the Mongol empire vanished in 50 years",
+          "enHook": "The largest empire in history. Why did it vanish in 50 years?",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 3 个现有视频 → 此角度零竞品"
+        }
+      ],
+      "badAngles": [
+        "pure Mongol conquest narrative (done to death on Kings and Generals)"
+      ],
+      "riskLevel": 2,
+      "sourceAvailability": 4
+    },
+    {
+      "figureId": "confucius",
+      "zhName": "孔子",
+      "enName": "Confucius",
+      "timePeriod": "551-479 BCE",
+      "role": "Philosopher",
+      "westernNotabilityTier": "S",
+      "evidence": {
+        "wikiQuality": "WikiRank top tier, ~20000 words, 18110 cross-language citations",
+        "youtubeTopViews": [
+          "Philosopher's Time series",
+          "Khan Academy has dedicated course"
+        ],
+        "searchDemand": "Stable Google Trends, high volume in philosophy/education searches"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "confucius-challenged",
+          "zhAngle": "Why Mao tried to erase him after 2500 years",
+          "enHook": "His ideas ruled China for 2,500 years. Why did Mao try to erase him?",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 2 个现有视频 → 此角度零竞品"
+        },
+        {
+          "angleKey": "confucius-lifelong-failure",
+          "zhAngle": "A lifelong failure whose ideas won anyway",
+          "enHook": "Confucius failed at every job he ever wanted. Why did his ideas conquer Asia?",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 2 个现有视频 → 此角度零竞品"
+        }
+      ],
+      "badAngles": [
+        "Analects academic explanation (too academic, no YouTube audience)"
+      ],
+      "riskLevel": 1,
+      "sourceAvailability": 5
+    },
+    {
+      "figureId": "sun-tzu",
+      "zhName": "孙子",
+      "enName": "Sun Tzu",
+      "timePeriod": "~544-496 BCE",
+      "role": "Military strategist",
+      "westernNotabilityTier": "S",
+      "evidence": {
+        "wikiQuality": "WikiRank good, Art of War translated over 100 times",
+        "youtubeTopViews": [
+          "Kings and Generals has dedicated video",
+          "Massive business/management content references"
+        ],
+        "searchDemand": "Stable Sun Tzu + Art of War searches, but mostly business/management audience"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "sun-tzu-real-person",
+          "zhAngle": "Did Sun Tzu actually exist?",
+          "enHook": "Did the author of the Art of War actually exist?",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 2 个现有视频 → 此角度零竞品"
+        },
+        {
+          "angleKey": "sun-tzu-vs-clausewitz",
+          "zhAngle": "Eastern vs Western war philosophy",
+          "enHook": "2,500 years apart. Which war philosopher is actually right?",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 2 个现有视频 → 此角度零竞品"
+        }
+      ],
+      "badAngles": [
+        "Art of War modern business applications (self-help category, not history)"
+      ],
+      "riskLevel": 1,
+      "sourceAvailability": 3
+    },
+    {
+      "figureId": "zheng-he",
+      "zhName": "郑和",
+      "enName": "Zheng He",
+      "timePeriod": "1371-1433 CE",
+      "role": "Navigator",
+      "westernNotabilityTier": "A",
+      "evidence": {
+        "wikiQuality": "WikiRank good, ~6000 words",
+        "youtubeTopViews": [
+          "Kings and Generals has video but no missing-emperor angle",
+          "History Channel 1-2M documentary"
+        ],
+        "searchDemand": "Zheng He well-known in West, searches lower than Qin Shi Huang/Wu Zetian"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "missing-emperor-mission",
+          "zhAngle": "Was his real mission to find the missing Jianwen Emperor?",
+          "enHook": "Did China's greatest explorer sail to find a missing emperor?",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 2 个现有视频 → 此角度零竞品"
+        },
+        {
+          "angleKey": "china-columbus-who-first",
+          "zhAngle": "Why China closed doors while Europe colonized",
+          "enHook": "Zheng He sailed 600 years before Columbus. Why didn't China discover America?",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 2 个现有视频 → 此角度零竞品"
+        }
+      ],
+      "badAngles": [
+        "pure voyage history (low viewership without hook)"
+      ],
+      "riskLevel": 1,
+      "sourceAvailability": 5
+    },
+    {
+      "figureId": "an-lushan",
+      "zhName": "安禄山",
+      "enName": "An Lushan",
+      "timePeriod": "703-757 CE",
+      "role": "Rebel general",
+      "westernNotabilityTier": "A",
+      "evidence": {
+        "wikiQuality": "WikiRank good, ~8000 words",
+        "youtubeTopViews": [
+          "Kings and Generals: The Rebellion That Killed 40 Million",
+          "~10 major English videos"
+        ],
+        "searchDemand": "An Lushan Rebellion searched more as event than person"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "golden-age-collapse",
+          "zhAngle": "How 40 million deaths ended the Tang golden age",
+          "enHook": "1/3 of China's population died. How did one rebel end a golden age?",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 2 个现有视频 → 此角度零竞品"
+        },
+        {
+          "angleKey": "yang-guifei-catalyst",
+          "zhAngle": "Yang Guifei as unintended catalyst",
+          "enHook": "An emperor fell in love with his son's wife. The Tang Dynasty collapsed.",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 2 个现有视频 → 此角度零竞品"
+        }
+      ],
+      "badAngles": [
+        "pure military history (Kings and Generals already covers battles)"
+      ],
+      "riskLevel": 3,
+      "sourceAvailability": 5
+    },
+    {
+      "figureId": "han-wudi",
+      "zhName": "汉武帝",
+      "enName": "Emperor Wu of Han",
+      "timePeriod": "156-87 BCE",
+      "role": "Emperor",
+      "westernNotabilityTier": "A",
+      "evidence": {
+        "wikiQuality": "WikiRank good, Kings and Generals has dedicated episode",
+        "youtubeTopViews": [
+          "Kings and Generals ~1M views"
+        ],
+        "searchDemand": "Often confused with Wu Zetian, medium search volume"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "silk-road-builder",
+          "zhAngle": "He built the Silk Road by sending Zhang Qian west",
+          "enHook": "The Silk Road began when one emperor sent a diplomat 10,000 km west.",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        },
+        {
+          "angleKey": "confucianism-official",
+          "zhAngle": "Why he made Confucianism the state ideology",
+          "enHook": "Why did one emperor make Confucius the only philosopher allowed?",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        }
+      ],
+      "badAngles": [
+        "generic biography"
+      ],
+      "riskLevel": 1,
+      "sourceAvailability": 4
+    },
+    {
+      "figureId": "kangxi-emperor",
+      "zhName": "康熙",
+      "enName": "Kangxi Emperor",
+      "timePeriod": "1654-1722 CE",
+      "role": "Emperor",
+      "westernNotabilityTier": "A",
+      "evidence": {
+        "wikiQuality": "WikiRank good, ~6000 words",
+        "youtubeTopViews": [
+          "Quest for Power 250K",
+          "Generally 10-100K views"
+        ],
+        "searchDemand": "High recognition, but specific suspense angles almost untouched"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "succession-mystery",
+          "zhAngle": "20 sons, one mysterious will",
+          "enHook": "40 years of peace. 20 sons. One mysterious will.",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        },
+        {
+          "angleKey": "qing-golden-age-downfall",
+          "zhAngle": "Why the Qing collapsed 120 years after him",
+          "enHook": "He ruled 61 years, China's longest peace. Why did it all fall apart 120 years later?",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        }
+      ],
+      "badAngles": [
+        "generic biography"
+      ],
+      "riskLevel": 2,
+      "sourceAvailability": 4
+    },
+    {
+      "figureId": "xuanzang",
+      "zhName": "玄奘",
+      "enName": "Xuanzang",
+      "timePeriod": "602-664 CE",
+      "role": "Monk/traveler",
+      "westernNotabilityTier": "B",
+      "evidence": {
+        "wikiQuality": "WikiRank good, ~4000 words",
+        "youtubeTopViews": [
+          "Few English videos, mainly academic channels"
+        ],
+        "searchDemand": "Journey to the West novel searches high, real Xuanzang searches low"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "journey-real-vs-fiction",
+          "zhAngle": "Journey to the West vs real Xuanzang",
+          "enHook": "Journey to the West is fiction. But the real monk's trip was crazier.",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 1 个现有视频 → 此角度零竞品"
+        },
+        {
+          "angleKey": "silk-road-monk",
+          "zhAngle": "A Buddhist monk walked 20000 km across deserts",
+          "enHook": "A Buddhist monk walked 20,000 km across deserts to find books.",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 1 个现有视频 → 此角度零竞品"
+        }
+      ],
+      "badAngles": [
+        "Journey to the West novel explanation (literature/animation category)"
+      ],
+      "riskLevel": 1,
+      "sourceAvailability": 4
+    },
+    {
+      "figureId": "yuan-chonghuan",
+      "zhName": "袁崇焕",
+      "enName": "Yuan Chonghuan",
+      "timePeriod": "1584-1630 CE",
+      "role": "Ming general",
+      "westernNotabilityTier": "B",
+      "evidence": {
+        "wikiQuality": "WikiRank medium, ~3000 words",
+        "youtubeTopViews": [
+          "Zero dedicated English videos! Everyone talks Ming but no one focuses on him"
+        ],
+        "searchDemand": "Yuan Chonghuan very low English recognition, needs suspense hook to carry traffic"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "loyalist-executed",
+          "zhAngle": "The only man keeping Ming alive, executed by his emperor",
+          "enHook": "He was the only man keeping the Ming alive. Why did his emperor kill him?",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 1 个现有视频 → 此角度零竞品"
+        }
+      ],
+      "badAngles": [
+        "pure Ming-Qing war history"
+      ],
+      "riskLevel": 3,
+      "sourceAvailability": 4
+    },
+    {
+      "figureId": "sima-qian",
+      "zhName": "司马迁",
+      "enName": "Sima Qian",
+      "timePeriod": "~145-86 BCE",
+      "role": "Historian",
+      "westernNotabilityTier": "B",
+      "evidence": {
+        "wikiQuality": "WikiRank good, ~5000 words",
+        "youtubeTopViews": [
+          "Almost no dedicated English videos!"
+        ],
+        "searchDemand": "Records of the Grand Historian cited by sinologists, but low mass awareness"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "castrated-historian",
+          "zhAngle": "Castrated by the emperor, he wrote the greatest history book anyway",
+          "enHook": "An emperor castrated him. So he wrote the greatest history book ever.",
+          "competitionHint": "unique",
+          "competitionNote": "figure 级仅 1 个现有视频 → 此角度零竞品"
+        }
+      ],
+      "badAngles": [
+        "Records of the Grand Historian content explanation (too academic)"
+      ],
+      "riskLevel": 1,
+      "sourceAvailability": 4
+    },
+    {
+      "figureId": "cixi",
+      "zhName": "慈禧太后",
+      "enName": "Empress Dowager Cixi",
+      "timePeriod": "1835-1908 CE",
+      "role": "Late Qing de facto ruler",
+      "westernNotabilityTier": "A",
+      "evidence": {
+        "wikiQuality": "WikiRank top tier, ~12000 words",
+        "youtubeTopViews": [
+          "Timeline dedicated video 1-2M views",
+          "Multiple English documentaries"
+        ],
+        "searchDemand": "High English recognition, but negative villain image is fixed in West"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "western-vs-china-perspective",
+          "zhAngle": "West calls her villain, China has complex views",
+          "enHook": "The West called her China's worst villain. China's view is more complicated.",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        },
+        {
+          "angleKey": "boxer-rebellion-role",
+          "zhAngle": "Why she declared war on 8 nations at once",
+          "enHook": "Why did one woman declare war on eight nations at once?",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        }
+      ],
+      "badAngles": [
+        "generic biography (negative image fixed)",
+        "pure evil villain narrative (violates our cost angle)"
+      ],
+      "riskLevel": 3,
+      "sourceAvailability": 5
+    },
+    {
+      "figureId": "wang-anshi",
+      "zhName": "王安石",
+      "enName": "Wang Anshi",
+      "timePeriod": "1021-1086 CE",
+      "role": "Song chancellor",
+      "westernNotabilityTier": "C",
+      "evidence": {
+        "wikiQuality": "~4000 words",
+        "youtubeTopViews": [
+          "English YouTube zero results! Complete blue ocean"
+        ],
+        "searchDemand": "Wang Anshi very low English recognition, must package as universal theme"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "reform-causes-collapse",
+          "zhAngle": "His reforms destroyed the dynasty he tried to save",
+          "enHook": "He tried to make Song China the world's most advanced nation. His reforms destroyed it 66 years later.",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        }
+      ],
+      "badAngles": [
+        "pure Wang Anshi biography (no one knows who he is)"
+      ],
+      "riskLevel": 1,
+      "sourceAvailability": 4
+    },
+    {
+      "figureId": "yue-fei",
+      "zhName": "岳飞",
+      "enName": "Yue Fei",
+      "timePeriod": "1103-1142 CE",
+      "role": "Southern Song general",
+      "westernNotabilityTier": "C",
+      "evidence": {
+        "wikiQuality": "~4000 words",
+        "youtubeTopViews": [
+          "Almost no dedicated English videos"
+        ],
+        "searchDemand": "Yue Fei very low English recognition, but loyal-general-executed is universal theme"
+      },
+      "safeAngles": [
+        {
+          "angleKey": "loyalty-vs-peace",
+          "zhAngle": "Recalled from victory, executed for peace treaty",
+          "enHook": "He was about to win back China. His emperor recalled him and had him killed.",
+          "competitionHint": "unique",
+          "competitionNote": "badAngles 标记 generic biography 烂大街，此角度为独特视角 → 零竞品"
+        }
+      ],
+      "badAngles": [
+        "pure Yue Fei biography"
+      ],
+      "riskLevel": 2,
+      "sourceAvailability": 4
+    }
+  ]
+}

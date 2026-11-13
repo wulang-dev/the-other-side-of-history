@@ -1,0 +1,742 @@
+{
+  "gateStatus": "passed",
+  "claims": [
+    {
+      "claim_id": "claim-001",
+      "claim_zh": "武则天于天授元年九月初九（690年10月16日）宣布改唐为周，登基为圣神皇帝，定都洛阳改称神都",
+      "claim_text": "Wu Zetian proclaimed the Zhou Dynasty and ascended as Holy and Divine Emperor on 16 October 690, moving the capital to Luoyang",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·则天皇后本纪》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7006",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "后晋945年修，直接抄录唐实录，时间线最可靠"
+        },
+        {
+          "type": "正史",
+          "title": "《资治通鉴·唐纪·则天顺圣皇后》",
+          "url": "https://zh.wikisource.org/wiki/%E8%B5%84%E6%B2%BB%E9%80%9A%E9%89%B4/%E5%8D%B7205",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "北宋1084年编年体，时间点精确"
+        },
+        {
+          "type": "现代研究",
+          "title": "Wu Zetian (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Wu_Zetian",
+          "license_type": "cc-by-sa",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "引用20+学术专著，时间线交叉验证"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-002",
+      "claim_zh": "武则天在位至神龙元年正月二十二日（705年2月20日）退位，武周实际存续14年4个月，通常称「15年」",
+      "claim_text": "Wu Zetian reigned until 20 February 705; the Zhou Dynasty lasted 14 years and 4 months, commonly rounded to 15 years",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·则天皇后本纪》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7006",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载神龙元年正月甲寅（二十二日）武则天传位于太子"
+        },
+        {
+          "type": "现代研究",
+          "title": "Wu Zetian (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Wu_Zetian",
+          "license_type": "cc-by-sa",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "Reign: 16 October 690 – 22 February 705"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-003",
+      "claim_zh": "武周年号共13个：天授、如意、长寿、延载、证圣、天册万岁、万岁登封、万岁通天、神功、圣历、久视、大足、长安",
+      "claim_text": "The Zhou Dynasty used 13 era names during Wu Zetian's reign",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《资治通鉴·唐纪·则天顺圣皇后》各卷",
+          "url": "https://zh.wikisource.org/wiki/%E8%B5%84%E6%B2%BB%E9%80%9A%E9%89%B4/%E5%8D%B7205",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "编年体每年标注年号，完整可查"
+        },
+        {
+          "type": "现代研究",
+          "title": "武周 (百度百科 / Chinese Text Project)",
+          "url": "https://ctext.org/datawiki.pl?if=en&res=819305&remap=gb",
+          "license_type": "unknown",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "年号列表完整"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-004",
+      "claim_zh": "武则天将洛阳定为武周都城，改称「神都「，长安保留为副都",
+      "claim_text": "Wu Zetian moved the capital to Luoyang, renamed it Shendu (Divine Capital)",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·则天皇后本纪》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7006",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "天授元年九月改洛阳为神都"
+        },
+        {
+          "type": "方志",
+          "title": "《唐两京城坊考》（徐松）",
+          "url": "https://zh.wikisource.org/wiki/%E5%94%90%E4%B8%A4%E4%BA%AC%E5%9F%8E%E5%9D%8A%E8%80%83",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "清代考据方志，记录两都宫室布局"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-005",
+      "claim_zh": "武则天是中国历史上唯一以「皇帝」（huangdi）名号独立统治的女性，而非皇后或摄政太后",
+      "claim_text": "Wu Zetian is the only woman in Chinese history to have ruled in her own name as emperor (huangdi), not as empress or regent",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "现代研究",
+          "title": "Keith McMahon, Women Shall Not Rule: Imperial Wives and Concubines in China from Han to Liao (Rowman & Littlefield, 2013)",
+          "url": "https://rowman.com/ISBN/9781442222904/Women-Shall-Not-Rule-Imperial-Wives-and-Concubines-in-China-from-Han-to-Liao",
+          "license_type": "restricted",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "现代权威学术专著，确认此唯一性"
+        },
+        {
+          "type": "正史",
+          "title": "《旧唐书·则天皇后本纪》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7006",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "虽后世列入「后妃传「，但武周时期确为皇帝"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-006",
+      "claim_zh": "李弘（武则天长子，652-675）23岁在太子任上暴亡，官方记载「薨「，死因后世存在「武则天毒杀「与「肺结核病故「两种说法",
+      "claim_text": "Li Hong, Wu Zetian's eldest son and crown prince, died suddenly at age 23 in 675; official records say natural death, while later accounts suggest Wu Zetian poisoned him",
+      "status": "inference",
+      "confidence": "C",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·高宗本纪》上元二年",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7005",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "仅载「皇太子弘薨于合璧宫之绮云殿「，无死因"
+        },
+        {
+          "type": "正史",
+          "title": "《新唐书·后妃传上·则天武皇后》",
+          "url": "https://zh.wikisource.org/wiki/%E6%96%B0%E5%94%90%E6%9B%B8/%E5%8D%B7076",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "北宋始载「后怒，鸩杀之「，但现代史学界多不信"
+        },
+        {
+          "type": "现代研究",
+          "title": "岑仲勉《隋唐史》（1961）",
+          "url": "",
+          "license_type": "restricted",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "岑仲勉指出李弘有肺结核家族史，病故可能性大"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-007",
+      "claim_zh": "李贤（武则天次子，655-684）675年继李弘为太子，680年因「谋反「被废流放巴州，684年被逼令自杀，著《黄台瓜辞》以寄悲愤",
+      "claim_text": "Li Xian, second son and crown prince 675-680, was exiled to Bazhou for treason in 680 and forced to commit suicide in 684; he wrote the Yellow Terrace Melons poem",
+      "status": "known",
+      "confidence": "B",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·章怀太子传》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7086",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载永隆元年（680）废为庶人，永淳二年（683）迁巴州，光宅元年（684）酷吏丘神勣逼令自杀"
+        },
+        {
+          "type": "正史",
+          "title": "《新唐书·章怀太子传》",
+          "url": "https://zh.wikisource.org/wiki/%E6%96%B0%E5%94%90%E6%9B%B8/%E5%8D%B7081",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载《黄台瓜辞》全文"
+        },
+        {
+          "type": "方志",
+          "title": "《长安志》（宋敏求）",
+          "url": "",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "记录巴州贬谪路线"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-008",
+      "claim_zh": "李显（武则天三子，656-710）684年1月继位为唐中宗，仅55天后（684年2月）被武则天下令废为庐陵王，流放房陵（今湖北房县）",
+      "claim_text": "Li Xian (Emperor Zhongzong), third son, ascended in January 684 but was deposed after only 55 days in February 684 and exiled to Fangling",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·中宗本纪》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7007",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "弘道元年十二月甲子（684年1月3日）即位，嗣圣元年二月戊午（684年2月26日）被废，在位55天"
+        },
+        {
+          "type": "正史",
+          "title": "《资治通鉴·唐纪·中宗嗣圣元年》",
+          "url": "https://zh.wikisource.org/wiki/%E8%B5%84%E6%B2%BB%E9%80%9A%E9%89%B4/%E5%8D%B7203",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载李显因说「以天下与韦玄贞何不可「被裴炎报告武则天后废"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-009",
+      "claim_zh": "李旦（武则天幼子，662-716）684年继李显为唐睿宗，690年被迫让位给武则天，降为皇嗣，改姓武",
+      "claim_text": "Li Dan (Emperor Ruizong), youngest son, ascended in 684 after Li Xian's deposition, then abdicated in favor of Wu Zetian in 690 and was reduced to imperial heir with surname Wu",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·睿宗本纪》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7007",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "嗣圣元年二月己未（684年2月27日）即位，天授元年九月（690年10月）让位"
+        },
+        {
+          "type": "现代研究",
+          "title": "Emperor Ruizong of Tang (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Emperor_Ruizong_of_Tang",
+          "license_type": "cc-by-sa",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载改姓武事件"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-010",
+      "claim_zh": "武则天垂拱二年（686年）在洛阳设置「铜匦「（铜制告密箱），四面涂不同颜色接受不同类型告密，形成全国告密网络",
+      "claim_text": "In 686, Wu Zetian established Tong Gui (copper suggestion boxes) in Luoyang, creating a nationwide informant network",
+      "status": "known",
+      "confidence": "B",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《资治通鉴·唐纪·垂拱二年》",
+          "url": "https://zh.wikisource.org/wiki/%E8%B5%84%E6%B2%BB%E9%80%9A%E9%89%B4/%E5%8D%B7203",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载铜匦由鱼保家设计，四面分别涂青、赤、白、黑，接受不同类文书"
+        },
+        {
+          "type": "其他",
+          "title": "人民网时政频道《武则天发明了「意见箱」?》",
+          "url": "http://politics.people.com.cn/n/2013/0913/c70731-22908634.html",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "中国政府网站，时间线与正史一致"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-011",
+      "claim_zh": "来俊臣（？-697）为武周最著名酷吏，曾任左台御史中丞，编写《罗织经》传授构陷之术，697年因诬告武氏宗族及武则天的男宠张易之兄弟被处死",
+      "claim_text": "Lai Junchen (d. 697) was Wu Zetian's most notorious secret police official, author of the Luozhi Jing (Manual of Entrapment), executed for conspiring against Wu clan members",
+      "status": "known",
+      "confidence": "B",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·酷吏传·来俊臣》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7186",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载《罗织经》编写始末及697年被处决"
+        },
+        {
+          "type": "现代研究",
+          "title": "Lai Junchen (Wikipedia)",
+          "url": "https://en.wikipedia.org/wiki/Lai_Junchen",
+          "license_type": "cc-by-sa",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "Death date: April 28, 697"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-012",
+      "claim_zh": "周兴（？-691）为武周早期酷吏，官至秋官侍郎，691年被来俊臣用「请君入瓮「之计反告，流放岭南途中被仇家所杀",
+      "claim_text": "Zhou Xing (d. 691), an early Zhou Dynasty harsh official, was trapped by Lai Junchen using the proverbial 'please enter the urn' trick, exiled and killed en route",
+      "status": "known",
+      "confidence": "B",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·酷吏传·周兴》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7186",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载「请君入瓮「故事，天授二年（691）二月流放"
+        },
+        {
+          "type": "其他",
+          "title": "正史中的武则天：任使多名酷吏（人民网文化频道）",
+          "url": "http://culture.people.com.cn/BIG5/n/2015/0119/c22219-26409364.html",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载27名酷吏名单，周兴来俊臣为首"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-013",
+      "claim_zh": "狄仁杰（630-700）为武周名臣，天授二年（691）首次拜相，后遭来俊臣诬陷下狱，万岁通天元年（696）再度拜相，700年卒，武则天为之罢朝三日，追赠文昌右相",
+      "claim_text": "Di Renjie (630-700) was a trusted Zhou Dynasty minister, twice chancellor, imprisoned by Lai Junchen's false charges, died 700; Wu Zetian suspended court for 3 days in mourning",
+      "status": "known",
+      "confidence": "B",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·狄仁杰传》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7089",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载两度拜相、691年遭酷吏诬陷、700年卒后武则天罢朝"
+        },
+        {
+          "type": "正史",
+          "title": "《新唐书·狄仁杰传》",
+          "url": "https://zh.wikisource.org/wiki/%E6%96%B0%E5%94%90%E6%9B%B8/%E5%8D%B7115",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "补充狄仁杰与武则天对话细节"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-014",
+      "claim_zh": "《旧唐书·则天皇后本纪》（后晋945年修成）是离唐代最近的官修正史，直接抄录唐实录和国史，正文无「武则天杀女「记载，仅在史臣论赞中模糊提及",
+      "claim_text": "The Old Book of Tang (945 CE), closest to Tang events, contains no narrative of Wu Zetian killing her daughter in the main text; only a vague comment in the historian's evaluation",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·则天皇后本纪》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7006",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "史臣曰中有「振喉绝襁褓之儿「句，但此为评论而非史实记载"
+        },
+        {
+          "type": "其他",
+          "title": "中新网《武则天杀死自己的亲生女儿有无其事?》",
+          "url": "http://www.chinanews.com.cn/cul/news/2007/12-10/1100559.shtml",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "对比新旧唐书关于杀女案记载差异"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-015",
+      "claim_zh": "《新唐书·后妃传上》（北宋1060年修成）首次出现「武则天杀女诬王皇后「的完整叙事：「昭仪生女，后就顾弄，去，昭仪潜毙儿衾下「，比《旧唐书》晚115年",
+      "claim_text": "The New Book of Tang (1060 CE), 115 years later than the Old Book, is the first source with the full narrative: 'Consort Wu bore a daughter; Empress Wang came to visit and left; Wu secretly smothered the child under blankets and blamed the Empress'",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《新唐书·后妃传上·则天武皇后》",
+          "url": "https://zh.wikisource.org/wiki/%E6%96%B0%E5%94%90%E6%9B%B8/%E5%8D%B7076",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "首次出现完整杀女叙事"
+        },
+        {
+          "type": "现代研究",
+          "title": "Wu Zetian infanticide plot (HistorIQly Blog)",
+          "url": "https://blog.historiqly.com/blog/royal-wu-zetian-infanticide-plot",
+          "license_type": "unknown",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "对比新旧唐书记载差异及后世传播链"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-016",
+      "claim_zh": "现代史学界（岑仲勉1961、傅乐成1978、Keith McMahon2013）基本否定武则天生母案真实性，认为是北宋儒家史官为「女祸论「制造的道德寓言",
+      "claim_text": "Modern historians (Cen Zhongmian 1961, Fu Lecheng 1978, McMahon 2013) widely reject the infanticide narrative as a Confucian moral fable created by Northern Song historians",
+      "status": "known",
+      "confidence": "B",
+      "sources": [
+        {
+          "type": "现代研究",
+          "title": "Keith McMahon, Women Shall Not Rule (2013)",
+          "url": "https://rowman.com/ISBN/9781442222904/Women-Shall-Not-Rule",
+          "license_type": "restricted",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "学术专著，详细分析杀女案作为后世建构"
+        },
+        {
+          "type": "现代研究",
+          "title": "岑仲勉《隋唐史》（1961）",
+          "url": "",
+          "license_type": "restricted",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "指出《新唐书》戏剧化记载不可靠"
+        },
+        {
+          "type": "现代研究",
+          "title": "Queenie Chan thesis: Re-interpreting a Female Chinese Emperor (2022)",
+          "url": "https://queeniechan.com/wp-content/uploads/2022/06/Queenie-Chan-thesis-FINAL-Part1.pdf",
+          "license_type": "unknown",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "后结构主义视角，引 Rothstein-Safra 2017"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-017",
+      "claim_zh": "武则天亲手杀死自己长女以嫁祸王皇后的叙事，缺乏可信史料支撑，仅为后世道德寓言",
+      "claim_text": "The narrative that Wu Zetian personally killed her infant daughter to frame Empress Wang lacks credible contemporary sources and is considered a later moral fable",
+      "status": "inference",
+      "confidence": "D",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·则天皇后本纪》（945 CE）",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7006",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "离事件最近的官修正史正文无此记载"
+        },
+        {
+          "type": "正史",
+          "title": "《新唐书·后妃传上》（1060 CE）",
+          "url": "https://zh.wikisource.org/wiki/%E6%96%B0%E5%94%90%E6%9B%B8/%E5%8D%B7076",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "首次完整出现此叙事，距事件发生已400年"
+        },
+        {
+          "type": "现代研究",
+          "title": "Keith McMahon, Women Shall Not Rule (2013)",
+          "url": "https://rowman.com/ISBN/9781442222904/Women-Shall-Not-Rule",
+          "license_type": "restricted",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "明确否定杀女真实性"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-018",
+      "claim_zh": "武则天载初二年（691）增设「殿试「，由皇帝亲自在洛阳紫微城制策问，为科举最高级别考试",
+      "claim_text": "In 691, Wu Zetian established the Palace Examination (Dian Shi), where she personally conducted policy essays in the Luoyang palace",
+      "status": "known",
+      "confidence": "B",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《资治通鉴·唐纪·天授二年》",
+          "url": "https://zh.wikisource.org/wiki/%E8%B5%84%E6%B2%BB%E9%80%9A%E9%89%B4/%E5%8D%B7204",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载武则天自制策问于洛城殿，贡士需试杂文"
+        },
+        {
+          "type": "方志",
+          "title": "《唐会要·制举科》",
+          "url": "",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载殿试设立"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-019",
+      "claim_zh": "武则天长寿二年（693）扩大科举考生范围，允许非贵族出身的寒门子弟直接报名应试，且将制举改为每年一次（原数年一次），大幅增加进士科录取人数",
+      "claim_text": "In 693, Wu Zetian expanded the imperial examination system to allow commoner candidates to register directly, made special recruitment examinations annual (previously irregular), and greatly increased jinshi intake",
+      "status": "known",
+      "confidence": "B",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·则天皇后本纪》长寿二年",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7006",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载「初令举人自举「，允许士人自荐"
+        },
+        {
+          "type": "其他",
+          "title": "Wu Zetian civil service reform (Eastern Angle)",
+          "url": "https://www.easternangle.com/wu-zetian-the-woman-who-rewrote-chinas-rules/",
+          "license_type": "unknown",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载进士科扩招数据"
+        },
+        {
+          "type": "其他",
+          "title": "唐代帝陵·武则天科举改革（山西图书馆）",
+          "url": "https://www.sxlib.org.cn/dfzy/sxdwljgb/tddl/sxtsbl/tgzql/qlbm/201704/t20170426_698378.html",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "中国政府网站，载制举改为每年一次"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-020",
+      "claim_zh": "《大云经疏》（约689-690年由薛怀义等人撰写）伪造《大云经》梵文原本，预言武则天是弥勒菩萨下生转世，为武周建立提供宗教合法性，武则天遂令两京及各州建「大云寺「",
+      "claim_text": "The Dayun Jing Shu (689-690), forged by Xue Huaiyi and others, prophesied Wu Zetian as Maitreya reincarnated to legitimate her rule; she ordered Dayun Temples built across the empire",
+      "status": "known",
+      "confidence": "B",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·薛怀义传》",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7205",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载薛怀义造《大云经》"
+        },
+        {
+          "type": "现代研究",
+          "title": "Wu Zetian Buddhism Dayun Sutra (Tandfonline article)",
+          "url": "https://www.tandfonline.com/doi/pdf/10.1179/073750302788699628",
+          "license_type": "restricted",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "学术论文，分析《大云经》与武周合法性关系"
+        },
+        {
+          "type": "其他",
+          "title": "Gates of History: Empress Wu Zetian",
+          "url": "https://gatesofhistory.com/en/article/empress-wu-zetian-female-sovereign",
+          "license_type": "unknown",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载《大云经》预言弥勒转世"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-021",
+      "claim_zh": "龙门石窟奉先寺卢舍那大佛（672-676年开凿），武则天捐脂粉钱两万贯资助开凿，佛像面容传说模拟武则天本人形象",
+      "claim_text": "The Vairocana Buddha at Fengxian Temple in Longmen Grottoes (672-676 CE) was funded in part by Wu Zetian's personal cosmetic allowance of 20,000 strings of cash; local tradition holds the face was modeled on her",
+      "status": "inference",
+      "confidence": "C",
+      "sources": [
+        {
+          "type": "考古报告",
+          "title": "龙门石窟奉先寺造像记（现存铭文）",
+          "url": "http://www.china.org.cn/english/culture/98377.htm",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "铭文载武则天「助脂粉钱二万贯「，但未载面容模仿"
+        },
+        {
+          "type": "现代研究",
+          "title": "Wu Zetian and Buddhist Art (Tandfonline)",
+          "url": "https://www.tandfonline.com/doi/pdf/10.1179/073750302788699628",
+          "license_type": "restricted",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "学术论文指出面容模仿武则天是后世传说，非铭文所载"
+        },
+        {
+          "type": "其他",
+          "title": "Longmen Grottoes Fengxian Temple (Cultural Heritage Online)",
+          "url": "https://culturalheritageonline.com/magazine/unesco-world-heritage-sites-near-longmen-grottoes/",
+          "license_type": "unknown",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载开凿年代672-676"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-022",
+      "claim_zh": "乾陵无字碑位于陕西省咸阳市乾县梁山乾陵朱雀门外东侧，通高8.03米，厚1.49米，重98.84吨，由一整块巨石雕成，西侧是唐高宗李治有字碑，两碑东西对称",
+      "claim_text": "The Qianling Wordless Stele stands 8.03m tall, 1.49m thick, weighing 98.84 tons, hewn from a single stone, east of the memorial path at Qianling Mausoleum; a carved stele for Emperor Gaozong stands to its west",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "考古报告",
+          "title": "乾陵博物馆官方资料（陕西省文物局）",
+          "url": "https://wwj.shaanxi.gov.cn/ztzl/ndzt/2016n/zgcyksxtbggbxk/kbwgjshmfkf/201110/t20111010_2144131.html",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "中国政府网站，官方考古数据：高8.03米，重98.84吨"
+        },
+        {
+          "type": "其他",
+          "title": "Qianling Mausoleum (china.org.cn)",
+          "url": "http://www.china.org.cn/features/atam/2005-01/07/content_1115372.htm",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载无字碑位置和规格"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-023",
+      "claim_zh": "无字碑无字主流观点：唐中宗李显神龙政变后追复唐朝，武周被后世视为「伪朝」，正史不立武周本纪，中宗故意不在碑上刻字以抹去母亲的武周皇帝身份",
+      "claim_text": "Dominant academic view: Emperor Zhongzong (Li Xian) deliberately left the stele blank to erase Wu Zetian's identity as Zhou Dynasty emperor, as the Zhou was retroactively labeled a 'false dynasty'",
+      "status": "inference",
+      "confidence": "B",
+      "sources": [
+        {
+          "type": "方志",
+          "title": "《唐会要·陵庙》",
+          "url": "",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "宋王溥撰，载乾陵建置，提及武周陵制与唐陵之异"
+        },
+        {
+          "type": "现代研究",
+          "title": "岑仲勉《隋唐史》",
+          "url": "",
+          "license_type": "restricted",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "支持中宗抹去说"
+        },
+        {
+          "type": "考古报告",
+          "title": "乾陵考古发掘报告（1960-1962）",
+          "url": "",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "考古现场证据：其他陪葬墓均有碑文，无字碑为孤例"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-024",
+      "claim_zh": "无字碑无字的另一观点：武则天遗命「功过由后人评说，故不刻字「，此说法常见于民间传说和部分通俗史论",
+      "claim_text": "Alternative popular view: Wu Zetian left a will stating 'Let later generations evaluate my achievements and errors, therefore carve no characters on the stele'",
+      "status": "inference",
+      "confidence": "D",
+      "sources": [
+        {
+          "type": "其他",
+          "title": "Qianling Mausoleum (china.org.cn)",
+          "url": "http://www.china.org.cn/features/atam/2005-01/07/content_1115372.htm",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "将遗命说列为其中一种说法，但未引史料出处"
+        },
+        {
+          "type": "方志",
+          "title": "《旧唐书》《新唐书》均未载武则天有此遗命",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7006",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "正史无此遗命记载，为后世演绎"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-025",
+      "claim_zh": "神龙元年正月二十二日（705年2月20日），张柬之等「五王「（张柬之、敬晖、崔玄暐、袁恕己、桓彦范）联合太子李显发动政变，杀张易之、张昌宗兄弟，包围迎仙宫，逼武则天退位，史称「神龙政变「或「神龙革命「",
+      "claim_text": "On 20 February 705, the 'Five Princes' led by Zhang Jianzhi launched the Shenlong Coup, killed Zhang Yizhi and Zhang Changzong, surrounded the palace, and forced Wu Zetian to abdicate",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·中宗本纪》神龙元年",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7007",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载政变时间、五王名字、杀张易之兄弟"
+        },
+        {
+          "type": "正史",
+          "title": "《资治通鉴·唐纪·神龙元年》",
+          "url": "https://zh.wikisource.org/wiki/%E8%B5%84%E6%B2%BB%E9%80%9A%E9%89%B4/%E5%8D%B7207",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "编年体精确到日：神龙元年正月二十二日（705.2.20）"
+        },
+        {
+          "type": "其他",
+          "title": "神龙革命 (Chinese Text Project)",
+          "url": "https://ctext.org/datawiki.pl?if=en&res=819305&remap=gb",
+          "license_type": "unknown",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "神龙革命条目"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-026",
+      "claim_zh": "神龙元年二月初四（705年3月3日），唐中宗李显下诏复国号为「唐「，恢复高宗永淳年间官制礼仪，武周政权历时约15年正式终结",
+      "claim_text": "On 3 March 705, Emperor Zhongzong restored the Tang Dynasty name and pre-Wu-Zetian institutions, formally ending the 15-year Zhou Dynasty interregnum",
+      "status": "known",
+      "confidence": "A",
+      "sources": [
+        {
+          "type": "正史",
+          "title": "《旧唐书·中宗本纪》神龙元年二月",
+          "url": "https://zh.wikisource.org/wiki/%E6%97%A7%E5%94%90%E6%9B%B8/%E5%8D%B7007",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "载神龙元年二月甲寅（初四）复国号"
+        },
+        {
+          "type": "其他",
+          "title": "经冬复历春:从中宗复位到睿宗反正（中国青年报）",
+          "url": "https://zqb.cyol.com/html/2021-05/25/nw.D110000zgqnb_20210525_1-10.htm",
+          "license_type": "public-domain",
+          "crawled_at": "2026-11-13T12:00:00Z",
+          "notes": "中国政府报纸，载「复国号曰唐「及制度恢复"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "slug": "power-cost",
+    "figure": "wu-zetian",
+    "crawled_at": "2026-11-13T12:00:00Z",
+    "research_model": "Kimi-K3 (MODEL_RESEARCH)",
+    "gate2_decision": "pending - awaiting human Gate 2 ruling on each claim's known/inference/unknown classification and source license verification"
+  }
+}

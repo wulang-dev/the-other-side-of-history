@@ -42,8 +42,20 @@ for (const c of checks) {
     continue;
   }
   const content = fs.readFileSync(f, 'utf-8');
-  const match = content.match(new RegExp(`${c.field}\\s*:\\s*"?([^\\s"]+)"?`));
-  const val = match ? match[1] : null;
+  let val = null;
+  // JSON 文件直接 parse，避免正则匹配 JSON key 引号的 bug
+  if (c.file.endsWith('.json')) {
+    try {
+      const obj = JSON.parse(content);
+      val = obj[c.field] ?? null;
+    } catch {
+      val = null;
+    }
+  } else {
+    // Markdown front-matter：field 名后可选引号（兼容 JSON 和 YAML front-matter 两种格式）
+    const match = content.match(new RegExp(`${c.field}"?\\s*:\\s*"?([^\\s"]+)"?`));
+    val = match ? match[1] : null;
+  }
   if (val === c.expect) {
     console.log(`  ✅ ${c.file} → ${c.field}: ${val}`);
   } else {

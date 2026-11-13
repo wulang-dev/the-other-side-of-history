@@ -1,43 +1,35 @@
-fix: 第四轮审计 2 FAIL + 5 WARN 修复（端到端集成对齐）
+fix: 第五轮审计 3 FAIL 修复（prompt 层对齐）
 
-FAIL-9 source-ledger.json schema 未定义:
-- 新增 templates/schemas/source-ledger.schema.json
-- 顶层 gateStatus / claims / meta
-- 每条 claim: claim_id / claim_zh / status / sources / excluded_reason
-- skill-1 SKILL.md 内嵌 schema 引用 + 字段说明表
-- 与 qa.mjs / self-check.mjs 字段名完全对齐
-- sources[].license_type 枚举补充（public-domain / cc-by / cc-by-sa / restricted / unknown）
+核心发现：前四轮审计只做了规则层/数据层/代码层/流程层，没做 prompt 层
+AI 只看 prompt。SKILL.md 和 JSON 文件里的纪律 AI 根本读不到
+等于前四轮建的四张质量网（N1-N10 残留黑名单 / C1-C10 中式英语词库 /
+claim 锚点纪律 / 专有名词模板）全是事后检查，事前预防的门没关
 
-FAIL-10 模型 B 中英对照锚点对齐:
-- skill-2 SKILL.md 加三步 claim 锚点纪律
-- Step 1: 中文逻辑稿每段加 [claim-NNN]
-- Step 2: MODEL_A 英文生成必须保留锚点
-- Step 3: 模型 B 按 claim_id 逐个比对，锚点数量不等直接 FAIL
-- 锚点与 source-ledger.json claims[].claim_id 一一对应
+FAIL-11 prompt-english.txt 缺失 4 组核心约束:
+- 原 prompt 只有 10 条硬性约束
+- 新增约束 10-13:
+  10. claim 锚点必须保留（第四轮 FAIL-10）
+  11. N1-N10 中国史观残留禁令（第一轮 FAIL-4）
+  12. C1-C10 中式英语陷阱禁令（第二轮 FAIL-5）
+  13. 专有名词首次出现模板（第二轮 WARN-8）
+- 每个约束都给了具体黑名单/错→对例句/正确替代写法
+- 年份统一 CE/BCE（proper-noun-intro-templates.md）
 
-WARN-15 skill-2.5 会话归属补 IPA 确认:
-- rules 4.2 加: IPA 确认用当前任意模型均可（事实性查询不涉及叙事判断）
+FAIL-12 prompt-bilingual-check.txt 缺失 claim_id 对齐:
+- 原 prompt 只说"拿两份脚本做中英对照"
+- 新增前置 Step 1: 锚点数量检查（不等直接 FAIL）
+- 新增 Step 2: 逐 claim 比对表（不是按段落顺序）
+- 新增额外检查 6-8: C1-C10 + 专有名词模板覆盖 + 叙事残留密度
 
-WARN-16 字幕上传 checklist:
-- 新增 templates/subtitle-upload-checklist.md
-- 上传前准备 6 项 + Studio 上传 5 步 + 上传后验证 6 项
-- 明确不上传中文轨道（降低推荐权重）
+FAIL-13 cn-logic-template.md 缺失 claim 锚点结构:
+- 原模板只有"史料锚点【已知】"字样
+- 每段 claim 强制加 [claim-NNN] 占位
+- 开头加 claim 锚点纪律说明（第四轮 FAIL-13 / 第五轮 FAIL-13）
+- 尾部加"锚点总数必须等于 source-ledger.json claims 总数"
 
-WARN-17 发布后聚合清单:
-- 新增 templates/post-release-checklist.md
-- 48h 手动填写 retention-log / outlier-log
-- 每周手动填写 comment-log / health-metrics
-- 每月复盘指标
-
-WARN-18 Gate 模板内嵌标题/缩略图自检:
-- gate-1-topic.md 内嵌 10 项 §11.4 标题自检 + 8 项 §12.4 缩略图自检
-- 人类签字时只看一个模板，不用手动打开三个文件对照
-- 原 title-checklist.md / thumbnail-checklist.md 保留为详细版参考
-
-WARN-19 skill-2.5 IPA 自动标记:
-- skill-2.5 SKILL.md 流程步骤 2 改为自动标记 [NEEDS IPA]
-- 一次性列给人类确认，不是一个个暂停
-
-第四轮审计核心发现：前三轮只做规则层/数据层/代码层，没做端到端流程 walkthrough
-walkthrough 暴露的是集成 gap：schema 不匹配 + claim 对齐方式模糊 + 上传/发布步骤无模板
-本轮修复把流程从单个组件正确推进到连起来能跑
+审计方法演进:
+第 1 层 规则层（SKILL.md / rules）    → 纪律写了吗
+第 2 层 数据层（JSON schema）          → 结构对了吗
+第 3 层 代码层（脚本 grep + 运行）      → 脚本引用 JSON 了吗
+第 4 层 流程层（端到端 walkthrough）    → 连起来能跑吗
+第 5 层 prompt 层（AI 实际收到的指令）  → 纪律传给执行方了吗 ← 本轮新增
